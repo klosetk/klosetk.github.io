@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Khadijah Ellis | IT Systems Engineer &amp; Automation Architect</title>
+<title>Khadijah Ellis | AI Architect &amp; IT Systems Engineer</title>
 <meta name="description" content="Portfolio of Khadijah Ellis: IT automation, AI agents, identity and endpoint engineering, and Jira administration.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -419,18 +419,17 @@
     <h1>Khadijah Ellis</h1>
     <p class="roles">AI Architect <span class="sep">/</span> IT Systems Engineer &amp; Administrator</p>
     <p class="positioning">
-      I build the automation and identity infrastructure that runs an IT organization — AI triage agents,
-      workflow orchestration across MDM and ITSM platforms, and the endpoint and access systems underneath
-      them. My work concentrates on the seams between systems, where most IT operations actually break.
+      I build the automation and identity infrastructure that runs an IT organization. I focus on
+      the seams between systems, where most IT operations break.
     </p>
     <p class="method">
-      <b>Find the manual process</b><span class="arrow">→</span><b>design a repeatable workflow</b><span class="arrow">→</span><b>automate what can be automated</b><span class="arrow">→</span><b>document it so someone else can run it</b><span class="arrow">→</span><b>add governance</b>
+      <b>Find the manual process</b><span class="arrow">→</span><b>design a repeatable workflow</b><span class="arrow">→</span><b>automate what can be automated</b><span class="arrow">→</span><b>document it so others can run it</b><span class="arrow">→</span><b>add governance</b>
     </p>
 
     <div class="metrics">
       <div class="metric">
         <span class="fig">12</span>
-        <span class="cap">Epic-level programs delivered end to end</span>
+        <span class="cap">Epic-level programs delivered</span>
       </div>
       <div class="metric">
         <span class="fig">100<sup>+</sup></span>
@@ -457,25 +456,23 @@
       <div class="cap-col">
         <h3>AI systems &amp; agents</h3>
         <p>
-          Agent architecture and prompt design for production ticket triage — intent taxonomies,
-          routing logic, calibration examples, and the evaluation loop that keeps output consistent
-          when tickets are sparse or ambiguous.
+          Agent architecture and prompt design for production ticket triage: intent taxonomies,
+          routing logic, calibration examples, and an evaluation loop for sparse or ambiguous
+          tickets.
         </p>
       </div>
       <div class="cap-col">
         <h3>Automation engineering</h3>
         <p>
-          Workflow orchestration in n8n and Jira Automation across HRIS, ITSM, MDM, directory,
-          and logistics APIs. Approval gates, retention windows, error handling, and idempotent
-          writes to systems of record.
+          Workflow orchestration in n8n and Jira Automation across HRIS, ITSM, MDM, directory, and
+          logistics APIs, with error handling and idempotent writes to systems of record.
         </p>
       </div>
       <div class="cap-col">
         <h3>Identity, endpoint &amp; infrastructure</h3>
         <p>
-          Intune and Entra ID tenant administration, Autopilot provisioning, macOS and iOS MDM,
-          RBAC and SSO architecture, unified communications, and the audit work that keeps all
-          of it defensible.
+          Intune and Entra ID tenant administration, Autopilot provisioning, macOS and iOS MDM, RBAC
+          and SSO architecture, unified communications, and the audit work that keeps it defensible.
         </p>
       </div>
     </div>
@@ -491,22 +488,21 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2024 — 2026</span>
+          <span class="yr">2024–2026</span>
           <h3>AI-Driven Triage &amp; Resolution Intelligence</h3>
           <span class="ref">Program owner</span>
         </div>
         <div class="row-body">
           <p>
-            Designed and shipped the help desk's automated triage layer: queue architecture,
-            intelligent routing, and an Atlassian Rovo agent that raises tickets and writes triage
-            notes as first-line support. Built the intent taxonomy, then rewrote the agent's system
-            prompt after diagnosing a conflict between its "use judgment" and "don't invent facts"
-            instructions that was producing inconsistent output.
+            Designed and shipped the help desk's automated triage layer: an Atlassian Rovo agent
+            that raises tickets and writes triage notes as first-line support. Built the intent
+            taxonomy, then rewrote the agent's system prompt after diagnosing a conflict between
+            "use judgment" and "don't invent facts" that was producing inconsistent output.
           </p>
           <p class="result">
-            Extended into <strong>morning and evening SLA reporting</strong> — automated digests of
-            at-risk, resolved, and aging tickets, including a JQL scoping defect that had been
-            silently excluding resolved work from the metrics.
+            Extended into <strong>morning and evening SLA reporting</strong>: automated digests of
+            at-risk, resolved, and aging tickets. Caught a JQL scoping defect that had been silently
+            excluding resolved work from the metrics.
           </p>
           <ul class="chips">
             <li>Atlassian Rovo</li><li>Jira Automation</li><li>JSM</li><li>JQL</li><li>n8n</li><li>Prompt architecture</li>
@@ -522,14 +518,15 @@
         </div>
         <div class="row-body">
           <p>
-            Moved the entire employee lifecycle automation stack off Zapier onto self-hosted n8n,
-            sequenced by blast radius: credentials and infrastructure first, then low-risk
-            communication templates, then the high-risk builds — deprovision trigger, equipment-return
-            generator, onboarding invitations — followed by webhook cutover and decommission.
+            Moved the employee lifecycle automation stack off Zapier onto self-hosted n8n, sequenced
+            by blast radius: credentials and infrastructure first, then low-risk communication
+            templates, then the high-risk builds (deprovision trigger, equipment-return generator,
+            onboarding invitations), then webhook cutover and decommission.
           </p>
           <p class="result">
             Retired a <strong>third-party dependency</strong> from the critical path of every hire
-            and departure, with each replaced workflow documented before its predecessor was disabled.
+            and departure. Each replaced workflow was documented before its predecessor was
+            disabled.
           </p>
           <ul class="chips">
             <li>n8n</li><li>Zapier</li><li>Jira webhooks</li><li>JavaScript</li><li>REST APIs</li>
@@ -546,14 +543,13 @@
         <div class="row-body">
           <p>
             Replaced a BetterCloud-based deprovisioning process with a three-workflow n8n
-            architecture: a main flow with a Slack approval gate and a 30-day Jira-tracked data
-            retention window, a response handler for approvals and denials, and a dedicated error
-            handler. Delivered with an implementation plan, credential matrix, risk register, and
-            architecture diagram.
+            architecture: a main flow with a Slack approval gate and Jira-tracked data retention, a
+            response handler for approvals and denials, and an error handler. Delivered with an
+            implementation plan, credential matrix, risk register, and architecture diagram.
           </p>
           <p class="result">
             Turned an <strong>irreversible automated action</strong> into a reviewable one, with
-            account state recoverable for a month after the trigger fires.
+            account state recoverable for 30 days after the trigger fires.
           </p>
           <ul class="chips">
             <li>n8n</li><li>Slack API</li><li>Google Workspace Admin</li><li>Jira API</li><li>Mermaid</li>
@@ -569,15 +565,14 @@
         </div>
         <div class="row-body">
           <p>
-            Built automated IT asset lifecycle management from nothing. Designed the object schema
-            and attribute model in JSM Assets, then used n8n as an integration hub pulling devices
-            from three sources — Kandji/Iru for macOS, Intune and Entra ID for Windows, MaaS360 for
-            mobile — with eleven lifecycle states and automatic asset linking on onboard and offboard
-            tickets. Presented the finished system as a working demo to IT leadership.
+            Built IT asset lifecycle management from scratch. Designed the JSM Assets object schema and attribute model, then used n8n as the integration hub pulling devices from
+            Kandji/Iru (macOS), Intune and Entra ID (Windows), and MaaS360 (mobile), with eleven
+            lifecycle states and automatic asset linking on onboarding and offboarding tickets.
+            Presented the finished system in a working demo to IT leadership.
           </p>
           <p class="result">
             Replaced spreadsheet tracking with a <strong>single queryable system of record</strong>
-            covering laptops, desktops, phones, tablets, hotspots, and peripherals.
+            for laptops, desktops, phones, tablets, hotspots, and peripherals.
           </p>
           <ul class="chips">
             <li>JSM Assets</li><li>AQL</li><li>n8n</li><li>Kandji / Iru</li><li>Microsoft Graph</li><li>MaaS360 API</li>
@@ -593,12 +588,13 @@
         </div>
         <div class="row-body">
           <p>
-            A serverless API on Cloud Run exposing user profile data from the Google Admin SDK,
-            backed by a read-only service account scoped to Drive, users, and groups — so downstream
-            automations could resolve identity without each one holding admin credentials.
+            Built a serverless API on Cloud Run that exposes user profile data from the Google Admin
+            SDK through a read-only service account scoped to Drive, users, and groups.
           </p>
           <p class="result">
-            Centralized directory access behind <strong>one auditable, least-privilege endpoint</strong>.
+            Centralized directory access behind <strong>one auditable, least-privilege
+            endpoint</strong>, so downstream automations could resolve identity without each holding
+            admin credentials.
           </p>
           <ul class="chips">
             <li>Google Cloud Run</li><li>Admin SDK</li><li>Service accounts</li><li>Python</li><li>OAuth scopes</li>
@@ -608,17 +604,17 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2025 — 2026</span>
+          <span class="yr">2025–2026</span>
           <h3>Equipment Return Automation</h3>
           <span class="ref">FedEx RMA &amp; QR pack-and-ship</span>
         </div>
         <div class="row-body">
           <p>
-            Automated equipment recovery end to end: an offboarding ticket transition triggers RMA
-            creation against the FedEx API, generates a pack-and-ship QR label, and sends the
-            departing employee a branded return email with their asset list, deadline, tracking
-            number, and nearest drop-off location. Iterated through two earlier template versions,
-            then added a manual-trigger path for edge cases and extended it to a second facility.
+            Automated equipment recovery. An offboarding ticket transition created an RMA through
+            the FedEx API, generated a pack-and-ship QR label, and sent the departing employee a
+            branded return email with their asset list, deadline, tracking number, and nearest
+            drop-off location. After two earlier template versions, added a manual-trigger path for
+            edge cases and extended it to a second facility.
           </p>
           <p class="result">
             Removed the coordinator from the loop on <strong>every routine device return</strong>.
@@ -631,22 +627,20 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2024 — 2025</span>
+          <span class="yr">2024–2025</span>
           <h3>Cross-Platform Data &amp; Task Automation</h3>
           <span class="ref">Python in production workflows</span>
         </div>
         <div class="row-body">
           <p>
-            The foundation the later platform work was built on. Wrote Python inside automation
-            workflows to parse structured text into per-employee task records — isolating the correct
-            paragraph while excluding headers and unrelated blocks — then looped the output into
-            individual Trello cards rather than one combined card. Built a Gmail-to-Drive invoice
-            pipeline that identified attachments, retrieved the matching file, and reconciled it
-            against a financial transaction.
+            Wrote Python inside automation workflows to parse structured text into per-employee task
+            records (isolating the correct paragraph, excluding headers and unrelated blocks), then
+            looped the output into individual Trello cards instead of one combined card. Built a
+            Gmail-to-Drive invoice pipeline that identified attachments, retrieved the matching
+            file, and reconciled it against a financial transaction.
           </p>
           <p class="result">
-            Established the pattern used since: <strong>parse, filter, match, transform</strong>
-            between systems that were never designed to talk.
+            Established the pattern used since: <strong>parse, filter, match, transform</strong>.
           </p>
           <ul class="chips">
             <li>Python</li><li>Zapier</li><li>Trello API</li><li>Gmail API</li><li>Google Drive API</li><li>Docs → PDF</li>
@@ -673,15 +667,14 @@
         </div>
         <div class="row-body">
           <p>
-            A structured remediation of an accumulated tenant: PowerShell inventory export, then
-            Intune Management Extension log parsing across affected devices to find policy loops,
-            cross-referenced against high-frequency policy IDs to isolate root causes. Remediated
-            broken app detection rules, scripts missing exit codes, looping proactive remediations,
-            and duplicate user-plus-device group assignments.
+            Exported a PowerShell inventory, then parsed Intune Management Extension logs across
+            affected devices to find policy loops, cross-referencing high-frequency policy IDs to
+            isolate root causes. Fixed broken app detection rules, scripts missing exit codes,
+            looping proactive remediations, and duplicate user-plus-device group assignments.
           </p>
           <p class="result">
-            Produced <strong>per-device findings reports and a tenant-level audit</strong>, with stale
-            and unassigned policies removed and the remaining configuration documented.
+            Produced <strong>per-device findings reports and a tenant-level audit</strong>, removed
+            stale and unassigned policies, and documented the remaining configuration.
           </p>
           <ul class="chips">
             <li>Microsoft Intune</li><li>Entra ID</li><li>PowerShell</li><li>Microsoft Graph</li><li>IME log analysis</li>
@@ -691,22 +684,22 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2025 — 2026</span>
+          <span class="yr">2025–2026</span>
           <h3>Endpoint Provisioning &amp; Standardization</h3>
           <span class="ref">Engineering lead</span>
         </div>
         <div class="row-body">
           <p>
             Solved OEM bloatware on new hardware by validating an Autopilot plus Intune Fresh Start
-            cloud-download provisioning path, then packaged a Win32 app enforcing standardized
-            wallpaper and lock screen with shortcut icon repair — install and detection scripts, icon
-            assets, and a sixteen-step pilot-to-release runbook. Authored the macOS and Windows
-            build guides behind every new-hire device.
+            cloud-download provisioning path. Packaged a Win32 app that enforces a standardized
+            wallpaper and lock screen and repairs shortcut icons, with install and detection
+            scripts, icon assets, and a sixteen-step pilot-to-release runbook. Authored the macOS
+            and Windows build guides behind every new-hire device.
           </p>
           <p class="result">
-            Root-caused two field defects along the way: a timezone script's own service-restart
-            <strong>race condition</strong>, and a black-screen-at-login traced to winlogon
-            triggering hibernate on session disconnect.
+            Root-caused two field defects: a timezone script's own service-restart <strong>race
+            condition</strong>, and a black screen at login traced to winlogon triggering hibernate
+            on session disconnect.
           </p>
           <ul class="chips">
             <li>Windows Autopilot</li><li>Win32 packaging</li><li>PowerShell</li><li>Intune</li><li>Kandji</li><li>Event log forensics</li>
@@ -716,20 +709,20 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2025 — 2026</span>
+          <span class="yr">2025–2026</span>
           <h3>MDM Consolidation</h3>
           <span class="ref">MaaS360 → Intune + Iru</span>
         </div>
         <div class="row-body">
           <p>
-            Sunset a legacy mobile MDM across the iPhone and iPad fleet: removed management controls,
-            handled devices stuck in pending-control-removal through check-in and Apple Business
-            Manager server reassignment, re-enrolled into the new platform, and deprecated the three
-            legacy sync workflows feeding the asset system.
+            Sunset a legacy mobile MDM across the iPhone and iPad fleet: removed management
+            controls, cleared devices stuck in pending-control-removal through check-in and Apple
+            Business Manager server reassignment, re-enrolled them in the new platform, and
+            deprecated the three legacy sync workflows feeding the asset system.
           </p>
           <p class="result">
-            Collapsed <strong>three MDM platforms into two</strong>, with mobile device data
-            — IMEI, carrier, number — mapped into the asset schema from dual-SIM API responses.
+            Collapsed <strong>three MDM platforms into two</strong> and mapped mobile device data
+            (IMEI, carrier, number) from dual-SIM API responses into the asset schema.
           </p>
           <ul class="chips">
             <li>MaaS360</li><li>Iru / Kandji</li><li>Apple Business Manager</li><li>Intune</li><li>iOS / Android</li>
@@ -739,21 +732,21 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2024 — 2026</span>
+          <span class="yr">2024–2026</span>
           <h3>Access Governance &amp; RBAC Architecture</h3>
           <span class="ref">Longest-running program</span>
         </div>
         <div class="row-body">
           <p>
-            Two years of role and permission design for clinical and operational staff: a permission
-            glossary and role matrix for the EHR, local role group scaffolding, provisioning
-            specifications by job function, and user activity audits. Extended into an inventory of
-            every application outside SSO and a read-only role design derived from a
-            1,647-permission contact-center export.
+            Role and permission design for clinical and operational staff: a permission glossary and
+            role matrix for the EHR, local role group scaffolding, provisioning specifications by
+            job function, and user activity audits. Extended into an inventory of every application
+            outside SSO and a read-only role design derived from a 1,647-permission contact-center
+            export.
           </p>
           <p class="result">
             Turned <strong>ad-hoc access grants into a documented model</strong> that provisioning
-            automation could then execute against.
+            automation could execute against.
           </p>
           <ul class="chips">
             <li>RBAC design</li><li>SSO / SAML</li><li>Google Workspace</li><li>Genesys Cloud</li><li>Access reviews</li><li>athenaOne</li>
@@ -763,20 +756,20 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2024 — 2026</span>
+          <span class="yr">2024–2026</span>
           <h3>Unified Communications</h3>
           <span class="ref">RingCentral &amp; Genesys Cloud</span>
         </div>
         <div class="row-body">
           <p>
-            Owned telephony configuration and documentation: IVR call trees, queue wait and overflow
-            routing, number inventory, pod-based inbound call management for clinical teams, and
-            call-quality diagnostics built on jitter, packet loss, packet ordering, and MOS. Root-caused
-            a missed-call defect on the main member queue traced to unregistered IP devices.
+            Owned telephony configuration: IVR call trees, queue wait and overflow routing, number
+            inventory, pod-based inbound call management for clinical teams, and call-quality
+            diagnostics built on jitter, packet loss, packet ordering, and MOS. Traced a missed-call
+            defect on the main member queue to unregistered IP devices.
           </p>
           <p class="result">
-            Ran a <strong>license rationalization</strong> off seven weeks of combined call-volume
-            data, and authored the operational guidance clinical teams provision against.
+            Ran a <strong>license rationalization</strong> from seven weeks of combined call-volume
+            data and authored the operational guidance clinical teams provision against.
           </p>
           <ul class="chips">
             <li>RingCentral</li><li>Genesys Cloud</li><li>IVR design</li><li>VoIP QoS / MOS</li><li>Usage analytics</li>
@@ -786,20 +779,19 @@
 
       <article class="row">
         <div class="row-meta">
-          <span class="yr">2025 — 2026</span>
+          <span class="yr">2025–2026</span>
           <h3>Office Buildout &amp; De-staging</h3>
           <span class="ref">New office · program owner</span>
         </div>
         <div class="row-body">
           <p>
-            Planned and ran a new office's technology deployment — equipment staged to arrive first,
-            then device swaps, enrollment, and on-site support across the week — then ran its closure
-            two years later: full hardware inventory and asset tally, carrier sell-back submission,
-            freight coordination for conference-room AV, and site clearance confirmation.
+            Planned and ran a new office's technology deployment: equipment staged ahead, then device swaps, enrollment, and on-site support across the week. Ran its closure two
+            years later: full hardware inventory, carrier sell-back submission, freight coordination
+            for conference-room AV, and site clearance confirmation.
           </p>
           <p class="result">
-            Both directions of the lifecycle, with <strong>every asset reconciled</strong>
-            against the system of record.
+            Covered both ends of the lifecycle, with <strong>every asset reconciled</strong> against
+            the system of record.
           </p>
           <ul class="chips">
             <li>Asset reconciliation</li><li>Vendor management</li><li>AV / conferencing</li><li>Logistics</li>
@@ -813,11 +805,11 @@
   <section class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Platform administration</p>
-      <h2>Jira administration — IT Help Desk</h2>
+      <h2>Jira administration: IT Help Desk</h2>
       <p class="lede">
-        Project administrator for the organization's IT service desk: a team-managed Jira Service
-        Management project I own end to end, from request schema through workflow, SLAs, queues, and
-        the automation layer that routes every ticket.
+        Project administrator for the organization's IT service desk, a team-managed Jira Service
+        Management project I own from request schema through workflow, SLAs, queues, and the
+        automation that routes every ticket.
       </p>
     </div>
 
@@ -858,18 +850,18 @@
         </div>
         <div class="row-body">
           <p>
-            Designed the request catalog and the field schema behind it: help desk support, app
-            access, equipment orders, onboarding variants for full-time, clinical, and contract
-            staff, offboarding, leave of absence, and internal application support. Built the field model each
-            one collects — a required department picker across 29 organizational units, urgency
-            level, role and reporting manager, a support category taxonomy, and an Assets object
-            field that binds a ticket directly to the requester's device record.
+            Designed the request catalog: help desk support, app access, equipment orders,
+            onboarding variants for full-time, clinical, and contract staff, offboarding, leave of
+            absence, and internal application support. Built the fields each type collects: a
+            required department picker across 29 organizational units, urgency, role and reporting
+            manager, a support category taxonomy, and an Assets object field that binds a ticket to
+            the requester's device record.
           </p>
           <p class="result">
-            Also handled the <strong>deprecation side of the catalog</strong> — retiring request
-            types as processes moved to HR-owned systems, restricting access by group, and writing
-            the redirect into each type's description so requesters land in the right place instead
-            of a dead form.
+            Also handled the <strong>deprecation side of the catalog</strong>: retired request types
+            as processes moved to HR-owned systems, restricted access by group, and wrote a redirect
+            into each type's description so requesters were sent to the right place instead of a
+            dead form.
           </p>
           <ul class="chips">
             <li>JSM request types</li><li>Custom fields</li><li>Assets object fields</li><li>Permission scoping</li><li>Field configuration</li>
@@ -885,16 +877,16 @@
         </div>
         <div class="row-body">
           <p>
-            Built a workflow that models how requests actually stall, not just start and finish.
-            Ten global transitions across thirteen statuses spanning all three categories, including
-            three distinct approval gates — pending approval, awaiting HR, awaiting supervising
-            manager — and explicit wait states for third-party dependencies, user response, and
-            blocked work, so aging tickets are attributable rather than anonymous.
+            Built a workflow that models how requests actually stall, not just how they start and
+            finish. It spans all three status categories, with three approval gates (pending
+            approval, awaiting HR, awaiting supervising manager) and explicit wait states for
+            third-party dependencies, user response, and blocked work, so aging tickets are
+            attributable.
           </p>
           <p class="result">
-            Instrumented with four SLA metrics: <strong>time to first response, time to done,
-            time to triage normal change, and a pause clock</strong> that stops the timer while
-            work sits with the requester or a vendor.
+            Instrumented with SLAs for <strong>time to first response, time to done, time to triage
+            normal change, and a pause clock</strong> that stops the timer while work sits with the
+            requester or a vendor.
           </p>
           <ul class="chips">
             <li>Workflow design</li><li>Approval steps</li><li>SLA configuration</li><li>Status categories</li><li>Resolution mapping</li>
@@ -910,18 +902,18 @@
         </div>
         <div class="row-body">
           <p>
-            The routing layer runs on a single-select <code>Support Domain</code> field with nine
-            values — EMR systems, endpoint and MDM, identity and access, SaaS applications,
-            hardware, security, major incident, service request, procurement. A four-stage
-            automation chain writes it and acts on it: the triage agent classifies the domain on
-            create, posts an impact and risk comment, routes on domain, then posts a resolution
-            summary from worklogs and change history once the ticket closes.
+            Routing runs on a single-select <code>Support Domain</code> field with nine values: EMR
+            systems, endpoint and MDM, identity and access, SaaS applications, hardware, security,
+            major incident, service request, and procurement. A chain of automation rules writes and
+            acts on it: the triage agent classifies the domain on create, posts an impact and risk
+            comment, routes on domain, and posts a resolution summary from worklogs and change
+            history once the ticket closes.
           </p>
           <p class="result">
-            Routing uses an <strong>overflow delegation model</strong> rather than round-robin —
-            I hold every domain as the cross-domain administrator, and work only reaches the IAM,
-            endpoint, EMR, or procurement specialist once my open count crosses a threshold. The
-            automation encodes the real team structure instead of pretending the bench is flat.
+            Routing uses an <strong>overflow delegation model</strong> rather than round-robin. I
+            hold every domain as the cross-domain administrator, and work reaches the IAM, endpoint,
+            EMR, or procurement specialist only once my open count crosses a threshold. The
+            automation encodes the real team structure instead of assuming a flat bench.
           </p>
           <ul class="chips">
             <li>Jira Automation</li><li>Atlassian Rovo</li><li>Smart values</li><li>Conditional routing</li><li>Workload thresholds</li>
@@ -937,16 +929,17 @@
         </div>
         <div class="row-body">
           <p>
-            Eleven queues organized on three dimensions — criticality, operational domain, and
-            lifecycle — each a JQL filter over the classification the automation produced. Major
-            incident and security sort newest and highest-priority first; domain queues sort by
-            priority then creation date so nothing ages out unseen; the hardware queue layers
+            Queues are organized on three dimensions (criticality, operational domain, and
+            lifecycle), each a JQL filter over the classification the automation produced. Major
+            incident and security sort newest and highest-priority first. Domain queues sort by
+            priority, then creation date, so nothing ages out unseen. The hardware queue layers
             keyword detection over domain classification to catch tickets the classifier
             under-filled.
           </p>
           <p class="result">
-            The design deliberately <strong>separates routing from visibility</strong>: automation
-            owns assignment, queues are a read layer. Nobody sorts a queue to decide who works what.
+            The design <strong>separates routing from visibility</strong>: automation owns
+            assignment, and queues are a read layer, so nobody sorts a queue to decide who works
+            what.
           </p>
           <ul class="chips">
             <li>JQL</li><li>Queue design</li><li>statusCategory logic</li><li>Operational reporting</li>
@@ -974,7 +967,7 @@
       </div>
       <div class="stack-row">
         <dt>ITSM &amp; asset</dt>
-        <dd>Jira Service Management <span class="d">·</span> JSM project administration <span class="d">·</span> JSM Assets <span class="d">·</span> Confluence <span class="d">·</span> JQL / AQL / CQL <span class="d">·</span> Zendesk</dd>
+        <dd>Jira Service Management <span class="d">·</span> JSM Assets <span class="d">·</span> Confluence <span class="d">·</span> JQL / AQL / CQL <span class="d">·</span> Zendesk</dd>
       </div>
       <div class="stack-row">
         <dt>Cloud &amp; scripting</dt>
@@ -995,17 +988,17 @@
     <div class="sec-head">
       <p class="eyebrow">Documentation &amp; enablement</p>
       <h2>A system nobody else can run isn't finished</h2>
-      <p class="lede">Every program above shipped with the material that lets someone else operate it.</p>
+      <p class="lede">Every program above shipped with its documentation.</p>
     </div>
 
     <div class="three">
       <div class="w-item">
-        <span class="fig">100+</span>
+        <span class="fig">Reference</span>
         <h3>Technical documentation</h3>
         <p>
-          Confluence pages across IT Operations and the internal support hub — workflow
-          specifications, integration designs, onboarding and offboarding SOPs, build runbooks,
-          and an operational standards set for Jira.
+          Confluence pages across IT Operations and the internal support hub: workflow
+          specifications, integration designs, onboarding and offboarding SOPs, build runbooks, and
+          Jira operational standards.
         </p>
       </div>
       <div class="w-item">
@@ -1013,17 +1006,16 @@
         <h3>Visual &amp; communication systems</h3>
         <p>
           A flat-vector illustration system on a brand-derived palette for technology
-          communications, and hand-built HTML email templates for onboarding and equipment
-          return — branded type, asset lists, deadlines, and tracking.
+          communications, and hand-built HTML email templates for onboarding and equipment return.
         </p>
       </div>
       <div class="w-item">
         <span class="fig">Plain&nbsp;language</span>
         <h3>End-user translation</h3>
         <p>
-          Troubleshooting procedures written for people who don't work in IT: a five-step path
-          for poor call quality, Bluetooth interference and range diagnosis, and network guidance
-          that drops the jargon without losing the diagnosis.
+          Troubleshooting procedures for people who don't work in IT: a five-step path for poor call
+          quality, Bluetooth interference and range diagnosis, and network guidance that drops the
+          jargon without losing the diagnosis.
         </p>
       </div>
     </div>
@@ -1036,7 +1028,7 @@
       <a href="https://github.com/klosetk/it-automation-portfolio">Architecture write-ups</a>
       <!-- Add your personal email or LinkedIn link here -->
       <span>Austin, Texas</span>
-      <span>Systems &amp; Tech Support Specialist · Healthcare IT</span>
+      <span>Healthcare IT</span>
     </span>
   </footer>
 
