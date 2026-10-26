@@ -1,0 +1,140 @@
+{
+  "image": "images/after-a1-v3.jpg",
+  "imageSize": [1536, 1024],
+  "priceNote": "Prices are the listed prices saved in my shopping notes and may have changed. Product names were saved partly truncated, so use the search link and confirm the exact listing before buying.",
+  "items": [
+    {
+      "id": "arc", "x": 632, "y": 368, "zone": "Living",
+      "name": "Matte black arc floor lamp",
+      "spec": "66-in. iron arc. Base sits behind the sofa's east end and the shade arches over the seating. 2700K warm bulb.",
+      "product": "Black Arc Floor Lamp, 66\"", "seller": "At Home", "price": 119.99, "qty": 1,
+      "note": null, "status": "sourced"
+    },
+    {
+      "id": "cab", "x": 330, "y": 700, "zone": "Kitchenette",
+      "name": "Walnut base-cabinet run",
+      "spec": "Freestanding 60-in. run, 25 in. deep, 36 in. high. Walnut slab fronts with black steel pulls, against the south brick wall (x = 0 to 5 ft).",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Not yet sourced. The spec is the search brief.", "status": "to-source"
+    },
+    {
+      "id": "fridge", "x": 140, "y": 860, "zone": "Kitchenette",
+      "name": "Matte black under-counter fridge",
+      "spec": "24-in. unit at the east end of the run. Matte black keeps the no-chrome, no-stainless rule.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Not yet sourced.", "status": "to-source"
+    },
+    {
+      "id": "faucet", "x": 243, "y": 522, "zone": "Kitchenette",
+      "name": "Matte black bar sink and gooseneck faucet",
+      "spec": "18-in. bar sink set over the capped supply and drain stubs about 30 in. from the east wall.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Not yet sourced. Needs the plumbing stubs shown in the \"before\" shell.", "status": "to-source"
+    },
+    {
+      "id": "cooktop", "x": 360, "y": 572, "zone": "Kitchenette",
+      "name": "Portable two-burner induction cooktop",
+      "spec": "Plug-in, matte black, sits on the counter. Keeps the kitchenette renter-friendly: no gas line, no hardwiring.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Not yet sourced.", "status": "to-source"
+    },
+    {
+      "id": "vessel", "x": 95, "y": 565, "zone": "Kitchenette",
+      "name": "Turquoise ceramic vessel",
+      "spec": "One hand-glazed turquoise vessel on the counter. The single Western Americana color note on the brick end of the room.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Budgeted in the $300 to $600 accents reserve.", "status": "planned"
+    },
+    {
+      "id": "counter", "x": 60, "y": 645, "zone": "Kitchenette",
+      "name": "Charcoal counter",
+      "spec": "Honed charcoal, soapstone-look surface, 25 in. deep. Ties the kitchenette to the black steel.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Not yet sourced.", "status": "to-source"
+    },
+    {
+      "id": "sofa", "x": 600, "y": 640, "zone": "Living",
+      "name": "Cognac leather sofa",
+      "spec": "84-in. top-grain leather, tapered walnut legs, centered on the brick wall facing the window. Three solid pillows: two oatmeal, one burnt sienna.",
+      "product": "Miller 84\" Genuine Leather Sofa", "seller": "AllModern", "price": 2399.00, "qty": 1,
+      "note": "The one piece worth spending on. Genuine leather is what builds the patina.", "status": "sourced"
+    },
+    {
+      "id": "table", "x": 745, "y": 650, "zone": "Living",
+      "name": "Walnut slab coffee table",
+      "spec": "About 48 x 24 in., walnut top on a black steel base. One low brass bowl, nothing else.",
+      "product": "SAFAVIEH Jaxith 47.2 in. Walnut/Black Rectangle Wood Coffee Table", "seller": null, "price": 320.00, "qty": 1,
+      "note": null, "status": "sourced"
+    },
+    {
+      "id": "cowhide", "x": 640, "y": 735, "zone": "Living",
+      "name": "Brown-and-white cowhide",
+      "spec": "5 x 7 ft, layered on top of the wool rug under the coffee table. The Western Americana note, carried by material only.",
+      "product": "Natural Brown & White Cowhide Area Rug by Loon Peak, 5' x 7'", "seller": null, "price": 239.99, "qty": 1,
+      "note": null, "status": "sourced"
+    },
+    {
+      "id": "rug", "x": 1000, "y": 860, "zone": "Living",
+      "name": "Natural wool flat-weave rug",
+      "spec": "8 x 10 ft, flat pile, long side running east to west. Oatmeal, not jute.",
+      "product": "Newton Ivory Flatweave Area Rug, 8x10, Wool", "seller": null, "price": 229.99, "qty": 1,
+      "note": "Listed colour is ivory. The concept calls for natural oatmeal, so check the sample.", "status": "sourced"
+    },
+    {
+      "id": "sling", "x": 980, "y": 700, "zone": "Living",
+      "name": "Saddle-tan leather sling chairs",
+      "spec": "Pair, walnut frames. Intended placement: one at each end of the coffee table, angled 30 degrees toward the sofa.",
+      "product": "Sono Leather Sling Chair in Chestnut Tan", "seller": null, "price": 550.00, "qty": 2,
+      "note": "Listed frame is teak, not walnut. Check a sample against the other woods.", "status": "sourced"
+    },
+    {
+      "id": "dtable", "x": 1350, "y": 598, "zone": "Dining",
+      "name": "Walnut pedestal dining table",
+      "spec": "42-in. round, at the east end of the window so the north light stays open.",
+      "product": "Coaster Elowen Mid-Century Modern Round Light Walnut Solid Wood Dining Table", "seller": null, "price": 250.60, "qty": 1,
+      "note": "Lighter walnut finish than the rest of the room. Check a sample.", "status": "sourced"
+    },
+    {
+      "id": "dchairs", "x": 1222, "y": 640, "zone": "Dining",
+      "name": "Black steel and leather dining chairs",
+      "spec": "Pair, black steel frames with saddle-leather seats, compact enough to preserve the window.",
+      "product": "Set of 2 Dark Brown Leather Dining or Side Chairs", "seller": null, "price": 516.49, "qty": 1,
+      "note": "Listed leather is dark brown. The render shows a lighter saddle tan.", "status": "sourced"
+    },
+    {
+      "id": "bed", "x": 840, "y": 548, "zone": "Sleeping",
+      "name": "Low walnut platform bed",
+      "spec": "Queen, headboard on the west wall, oatmeal linen bedding and a burnt-sienna throw.",
+      "product": "AFI Aria Queen Modern Solid Wood Low Profile Platform Bed", "seller": null, "price": 320.45, "qty": 1,
+      "note": "An 80-in. queen mattress runs past the 72-in. sleeping zone, so keep the shelf divider offset from the foot of the bed. Mattress not included.", "status": "sourced"
+    },
+    {
+      "id": "lamp", "x": 953, "y": 490, "zone": "Sleeping",
+      "name": "Aged-brass bedside lamp",
+      "spec": "On one small walnut bedside table. Together with the arc lamp it is one of only two warm light pools in the room.",
+      "product": "Saed Desk Lamp, Corrigan Studio, Brass base", "seller": null, "price": 176.00, "qty": 1,
+      "note": "The bedside table is not sourced yet.", "status": "sourced"
+    },
+    {
+      "id": "art", "x": 837, "y": 428, "zone": "Sleeping",
+      "name": "Rust-and-sand abstract canvas",
+      "spec": "About 48 x 60 in., centered above the bed. The only wall art in the room.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Budgeted in the $300 to $600 accents reserve.", "status": "planned"
+    },
+    {
+      "id": "shelf", "x": 632, "y": 470, "zone": "Sleeping",
+      "name": "Open walnut and black steel shelf divider",
+      "spec": "5 ft, freestanding, only a few objects. Separates living from sleeping and sits offset from the bed's foot.",
+      "product": null, "seller": null, "price": null, "qty": 1,
+      "note": "Planned budget $100 to $250. Choose a wide base: a tall, light bookcase is a tipping hazard.", "status": "to-source"
+    },
+    {
+      "id": "olive", "x": 1040, "y": 430, "zone": "Sleeping",
+      "name": "Olive tree in a black planter",
+      "spec": "7 ft, matte black planter, at the west end of the north wall beside the bed zone.",
+      "product": "Romswi 7 ft. Artificial Olive Tree with Black Pot", "seller": null, "price": 53.20, "qty": 1,
+      "note": "Faux option listed. A live olive needs far more direct sun than north light gives.", "status": "sourced"
+    }
+  ]
+}

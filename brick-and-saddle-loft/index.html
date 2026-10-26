@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Brick &amp; Saddle Loft | Khadijah Ellis</title>
+<meta name="description" content="A 320 sq ft loft lookbook built from a structured design brief: locked architecture, a style ratio, a light-aware palette, scored render audits, and a hover-to-shop overlay.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  :root {
+    --ground:      #FFF9F4;
+    --surface:     #FFFFFF;
+    --ink:         #2A2340;
+    --ink-2:       #5A5170;
+    --ink-3:       #6F6585;
+    --hairline:    #F0DFD3;
+    --hairline-2:  #F7ECE3;
+    --accent:      #F2677B;
+    --accent-ink:  #C23B4A;
+    --chip-bg:     #FDEBDD;
+    --chip-ink:    #6B3E3A;
+    --band: linear-gradient(90deg, #FFB38A 0%, #FF8FA3 45%, #B7A6E8 75%, #8EC5E8 100%);
+    --glow: radial-gradient(60% 60% at 50% 0%, rgba(255,179,138,.35) 0%, rgba(255,143,163,.16) 45%, rgba(255,249,244,0) 100%);
+    --shadow: 0 10px 34px rgba(42,35,64,.22);
+    --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --col: 1120px;
+    --gutter: clamp(20px, 5vw, 56px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:     #151022;
+      --surface:    #1E1730;
+      --ink:        #FFF1E8;
+      --ink-2:      #D9CBDC;
+      --ink-3:      #B0A2BD;
+      --hairline:   #33284A;
+      --hairline-2: #271E3B;
+      --accent:     #FF8A5B;
+      --accent-ink: #FFA67F;
+      --chip-bg:    #2A2040;
+      --chip-ink:   #D9C9E6;
+      --band: linear-gradient(90deg, #FF9A62 0%, #E8506F 40%, #9B5DE5 75%, #3D4A9E 100%);
+      --glow: radial-gradient(60% 60% at 50% 0%, rgba(232,80,111,.28) 0%, rgba(155,93,229,.14) 45%, rgba(21,16,34,0) 100%);
+      --shadow: 0 10px 34px rgba(0,0,0,.55);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    border-top: 5px solid transparent;
+    border-image: var(--band) 1;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter); }
+
+  a { color: var(--accent-ink); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0;
+  }
+
+  .back { display: inline-block; margin-top: 22px; font-family: var(--mono); font-size: 12.5px; }
+
+  /* Hero */
+  .hero { background: var(--glow); padding: clamp(40px, 7vh, 84px) 0 clamp(36px, 5vh, 56px); text-align: center; }
+  .hero h1 {
+    margin: 20px 0 0; font-size: clamp(2.4rem, 6.4vw, 4.4rem); font-weight: 700;
+    letter-spacing: -0.038em; line-height: 1.02; text-wrap: balance;
+  }
+  .hero .positioning {
+    margin: 24px auto 0; max-width: 62ch; font-size: 1.0625rem; color: var(--ink-2); text-wrap: pretty;
+  }
+
+  .metrics {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    margin: clamp(32px, 5vh, 52px) 0 0; background: var(--hairline);
+    border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; text-align: center;
+  }
+  .metric { background: var(--surface); padding: 24px 16px 22px; }
+  .metric .fig {
+    display: block; font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 600;
+    letter-spacing: -0.035em; font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .metric .cap { display: block; margin-top: 10px; font-size: 12.5px; line-height: 1.4; color: var(--ink-3); text-wrap: balance; }
+
+  /* Sections */
+  section.wrap { padding-top: clamp(52px, 7.5vh, 92px); }
+  .sec-head { margin-bottom: 30px; }
+  .sec-head h2 {
+    margin: 14px 0 0; font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 600;
+    letter-spacing: -0.03em; line-height: 1.12; text-wrap: balance;
+  }
+  .sec-head p.lede { margin: 12px 0 0; max-width: 64ch; color: var(--ink-3); font-size: 1rem; }
+
+  /* Interactive figure */
+  .figure { position: relative; }
+  .stage {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--hairline); background: var(--surface); line-height: 0;
+  }
+  .stage img { display: block; width: 100%; height: auto; }
+
+  .hs {
+    position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; padding: 0;
+    border-radius: 50%; border: 2px solid #fff; background: var(--accent); cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.45);
+    transition: transform .15s ease;
+  }
+  .hs::after {
+    content: ""; position: absolute; inset: -7px; border-radius: 50%;
+    border: 2px solid #fff; opacity: .0; animation: pulse 2.6s ease-out infinite;
+  }
+  .hs:hover, .hs[aria-expanded="true"] { transform: scale(1.18); }
+  .hs[aria-expanded="true"] { background: #fff; border-color: var(--accent); }
+  .hs.sourced { background: var(--accent); }
+  .hs.to-source, .hs.planned { background: #6F6585; }
+  .markers-off .hs { display: none; }
+  @keyframes pulse { 0% { opacity: .55; transform: scale(.7); } 80%, 100% { opacity: 0; transform: scale(1.25); } }
+
+  .card {
+    position: absolute; z-index: 5; width: 310px; max-width: calc(100% - 16px);
+    background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
+    border-radius: 12px; padding: 16px 16px 14px; box-shadow: var(--shadow);
+    line-height: 1.45; font-size: 14px;
+  }
+  .card[hidden] { display: none; }
+  .card .zone { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .card h3 { margin: 4px 0 0; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; }
+  .card .spec { margin: 8px 0 0; color: var(--ink-2); }
+  .card .shop { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--hairline); }
+  .card .shop .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .card .prod { margin: 4px 0 0; font-weight: 600; }
+  .card .price { margin: 2px 0 0; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .card .note { margin: 8px 0 0; color: var(--ink-3); font-size: 13px; }
+  .card .find {
+    display: inline-block; margin-top: 10px; font-weight: 600; font-size: 13.5px;
+  }
+  .card .close {
+    position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border: 0;
+    background: transparent; color: var(--ink-3); font-size: 20px; line-height: 1; cursor: pointer; border-radius: 6px;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+  .legend .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 7px; vertical-align: -1px; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--hairline); }
+  .legend .dot.s { background: var(--accent); }
+  .legend .dot.t { background: #6F6585; }
+  .legend button {
+    margin-left: auto; font: inherit; font-size: 12.5px; color: var(--accent-ink); background: transparent;
+    border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 13px; cursor: pointer;
+  }
+  .caption { margin: 14px 0 0; font-size: 14px; color: var(--ink-3); max-width: 70ch; }
+
+  /* Cards, grids */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(22px, 3vw, 40px); }
+  .col { border-top: 2px solid var(--accent); padding-top: 16px; }
+  .col h3 { margin: 0; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.015em; }
+  .col p, .col li { font-size: 0.9375rem; color: var(--ink-2); }
+  .col p { margin: 8px 0 0; }
+  .col ul { margin: 8px 0 0; padding-left: 18px; }
+  .col .num { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: .1em; }
+
+  .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--hairline); }
+  .fact { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--hairline-2); font-size: 0.9375rem; }
+  .fact:nth-child(odd) { padding-right: 24px; }
+  .fact dt { font-weight: 600; }
+  .fact dd { margin: 0; color: var(--ink-2); }
+
+  ol.principles { list-style: none; counter-reset: p; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
+  ol.principles li { counter-increment: p; display: grid; grid-template-columns: 54px 1fr; gap: 8px; padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  ol.principles li::before { content: counter(p, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--accent-ink); padding-top: 4px; }
+  ol.principles strong { display: block; font-size: 1.0125rem; letter-spacing: -0.01em; }
+  ol.principles span { color: var(--ink-2); font-size: 0.9375rem; }
+
+  details { border: 1px solid var(--hairline); border-radius: 12px; background: var(--surface); margin-top: 16px; }
+  summary { cursor: pointer; padding: 14px 18px; font-weight: 600; font-size: 0.9625rem; }
+  pre {
+    margin: 0; padding: 4px 18px 18px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px;
+    line-height: 1.7; color: var(--ink-2); white-space: pre-wrap; word-break: break-word;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9125rem; }
+  th, td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-right: 0; padding-left: 12px; }
+  tr.total td { font-weight: 600; border-bottom: 0; }
+  td .sub { display: block; color: var(--ink-3); font-size: 12.5px; margin-top: 2px; }
+  .table-wrap { overflow-x: auto; }
+
+  .tag { font-family: var(--mono); font-size: 10.5px; background: var(--chip-bg); color: var(--chip-ink); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+
+  .callout {
+    margin-top: 22px; padding: 16px 18px; border-left: 3px solid var(--accent);
+    background: var(--surface); border-radius: 0 10px 10px 0; font-size: 0.9375rem; color: var(--ink-2);
+  }
+
+  footer {
+    margin-top: clamp(60px, 8vh, 96px); border-top: 1px solid var(--hairline); padding: 36px 0 60px;
+    display: flex; flex-wrap: wrap; gap: 14px 36px; align-items: baseline; justify-content: space-between;
+  }
+  footer .name { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; }
+  footer .meta { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+  @media (max-width: 940px) {
+    .grid3 { grid-template-columns: 1fr; gap: 24px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .facts { grid-template-columns: 1fr; }
+    .fact:nth-child(odd) { padding-right: 0; }
+  }
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .card { position: static; width: auto; max-width: none; margin-top: 12px; }
+    .fact { grid-template-columns: 1fr; gap: 2px; }
+    .legend button { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header class="hero wrap">
+    <p class="eyebrow">Interior concept &nbsp;·&nbsp; Prompt architecture</p>
+    <h1>Brick &amp; Saddle Loft</h1>
+    <p class="positioning">
+      A 320 sq ft loft designed end to end from a structured brief: locked architecture, a style
+      ratio, a palette tied to the room's light, specified pieces, and a scored audit of every
+      render against that brief.
+    </p>
+    <div class="metrics">
+      <div class="metric"><span class="fig">6</span><span class="cap">Pillars in the design brief</span></div>
+      <div class="metric"><span class="fig">3</span><span class="cap">Prompt iterations, each driven by an audit</span></div>
+      <div class="metric"><span class="fig">91%</span><span class="cap">Final render's match to the brief (manual audit, 40 of 44 checks)</span></div>
+      <div class="metric"><span class="fig" id="m-count">19</span><span class="cap">Pieces in the hover-to-shop overlay</span></div>
+    </div>
+    <a class="back" href="../">&larr; Back to portfolio</a>
+  </header>
+
+  <section class="wrap" id="look">
+    <div class="sec-head">
+      <p class="eyebrow">The look</p>
+      <h2>Hover, tap, or tab to the dots to see what to buy</h2>
+      <p class="lede">
+        Each marker opens the piece's specification and the suggested product to shop for. Colored
+        markers have a sourced product. Grey markers are specified but not sourced yet.
+      </p>
+    </div>
+
+    <div class="figure" id="figure">
+      <div class="stage" id="stage">
+        <img src="images/after-a1-v3.jpg" width="1536" height="1024"
+             alt="Rendered view of the finished loft: a walnut kitchenette along a red brick wall on the left, a cognac leather sofa with an arc floor lamp, a cowhide-layered wool rug, two leather sling chairs, a bed and olive tree at the far end, and a black steel factory window on the right.">
+      </div>
+      <aside class="card" id="card" role="region" aria-label="Item details" aria-live="polite" hidden></aside>
+    </div>
+
+    <div class="legend">
+      <span><span class="dot s"></span>Sourced product</span>
+      <span><span class="dot t"></span>Spec only</span>
+      <button type="button" id="toggle">Hide markers</button>
+    </div>
+    <p class="caption">
+      View A1: camera at the east wall looking west, 5-ft eye level, 24 mm. The brick south wall
+      is on the left and the north window is on the right.
+    </p>
+  </section>
+
+  <section class="wrap" id="shell">
+    <div class="sec-head">
+      <p class="eyebrow">Before</p>
+      <h2>The shell: ground truth that never changes</h2>
+      <p class="lede">
+        The empty loft is specified first. The same architecture block opens every "after" prompt,
+        so only the furnishings change between renders.
+      </p>
+    </div>
+    <dl class="facts">
+      <div class="fact"><dt>Footprint</dt><dd>16 x 20 ft open studio, long axis east to west</dd></div>
+      <div class="fact"><dt>Ceiling</dt><dd>12 ft, exposed rough-sawn timber beams at 4 ft spacing, black conduit</dd></div>
+      <div class="fact"><dt>North wall</dt><dd>One 12 x 8 ft black steel factory window, 12-pane grid, cool daylight</dd></div>
+      <div class="fact"><dt>South wall</dt><dd>Original red brick, uneven mortar, soft patina</dd></div>
+      <div class="fact"><dt>East and west walls</dt><dd>Flat white drywall, 6-inch baseboard. Door on the east wall</dd></div>
+      <div class="fact"><dt>Floor</dt><dd>Polished light grey concrete with trowel marks</dd></div>
+      <div class="fact"><dt>Plumbing</dt><dd>Capped supply and drain stubs on the south wall, about 30 in. from the east wall (added when the kitchenette replaced a console)</dd></div>
+      <div class="fact"><dt>Light</dt><dd>Neutral-cool, about 6000 to 6500K, bright overcast, 10:30 AM</dd></div>
+    </dl>
+  </section>
+
+  <section class="wrap" id="brief">
+    <div class="sec-head">
+      <p class="eyebrow">The brief</p>
+      <h2>Six pillars, filled in before any image is generated</h2>
+    </div>
+    <div class="grid3">
+      <div class="col"><span class="num">01</span><h3>Fixed facts</h3><p>Dimensions, ceiling, window, walls, floor. Treated as unchangeable across every prompt.</p></div>
+      <div class="col"><span class="num">02</span><h3>Style ratio</h3><p><strong>60% Mid-Century Modern, 25% Industrial, 15% Western Americana.</strong> The industrial share comes from the building. The Western share is carried by material only: saddle leather, cowhide, aged brass.</p></div>
+      <div class="col"><span class="num">03</span><h3>Palette tied to light</h3><p>North light is cool and flat, so the palette runs warm: cognac, burnt sienna, saddle tan, oatmeal, walnut, aged brass, with 2700K lamps as the only warm pools.</p></div>
+      <div class="col"><span class="num">04</span><h3>Key pieces</h3><p>Every piece is written as material plus placement, for example "84-inch cognac top-grain leather sofa centered on the brick wall facing the window."</p></div>
+      <div class="col"><span class="num">05</span><h3>Constraints and exclusions</h3><p>Renter-friendly, freestanding, moderate budget. No chrome or stainless, no barn wood, no animal skulls, no striped patterns, no upper cabinets or open kitchen shelving.</p></div>
+      <div class="col"><span class="num">06</span><h3>Output specification</h3><p>5-ft eye level, 24 mm wide angle, f/8, straight verticals, 3:2, one image per generation, plus a room-zone text brief and a shopping table.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="strategy">
+    <div class="sec-head">
+      <p class="eyebrow">Prompt strategy</p>
+      <h2>How the prompts were built, and why they changed</h2>
+    </div>
+    <ol class="principles">
+      <li><div><strong>Lock the shell first</strong><span>Generate the empty loft, then reuse its architecture block word for word in every "after" prompt. Consistency comes from repetition, not from asking the model to remember.</span></div></li>
+      <li><div><strong>Write material and placement, not nouns</strong><span>"A leather sofa" produces any sofa. "84-inch cognac top-grain leather sofa with tapered walnut legs, centered on the brick wall" produces a checkable one.</span></div></li>
+      <li><div><strong>Tie the palette to the light</strong><span>The window faces north, so daylight is cool. The prompt states that and names the warm counter-palette and bulb temperature, which also stopped the model from defaulting to golden hour.</span></div></li>
+      <li><div><strong>Spell out orientation</strong><span>Each shot line names which wall is on the left and right and what is behind the camera. The first render put brick on the wrong wall and a door in view until these were added.</span></div></li>
+      <li><div><strong>Name what must not appear</strong><span>Negative constraints came from reading failures: exactly one window, no pouf, no striped pillows, no stainless. Each is a line that exists because a render broke the rule.</span></div></li>
+      <li><div><strong>One image per generation</strong><span>The first attempt asked for three views in one collage and the model reinvented the room per panel. Generating A1 alone, then using it as a reference for the other views, keeps the room stable.</span></div></li>
+      <li><div><strong>Audit, then patch the prompt</strong><span>Every render is scored against the brief. Defects become new lines in the prompt, and design problems found in the audit (two lamps stacked, an arbitrary console) change the brief itself.</span></div></li>
+    </ol>
+
+    <details>
+      <summary>Locked "before" prompt (empty shell)</summary>
+<pre>Architecture &amp; Ground Truth: Empty 16x20 ft open studio loft, 12 ft ceiling with exposed rough-sawn timber beams running north-south at 4 ft spacing. North wall: one large black steel-framed factory window, 12 ft wide x 8 ft tall, 12-pane grid, sill 2.5 ft above floor. South wall: original red brick, uneven mortar, soft patina. East and west walls: matte white painted drywall, 6-inch painted baseboard. Floor: polished concrete, light grey, subtle trowel marks and hairline cracks. Black conduit along the ceiling beams. Two capped copper water supply stubs and one capped drain stub emerge from the south brick wall about 30 inches from the east wall, 6 inches above the floor, with one exposed outlet box beside them. Completely empty, no furniture, no decor, no people.
+
+Palette &amp; Lighting: Cool, diffuse north daylight (about 6500K) through the window, 10:30 AM, soft shadows with no direct sun. Brick reads warm against the cool light.
+
+Camera &amp; Output: 5-foot eye-level camera, 24mm full-frame wide-angle lens, f/8, vertical lines kept straight, hyper-realistic textures, architectural editorial photography, 3:2 aspect ratio.
+
+Shot B1: Camera position: standing at the east door, looking west. Brick wall on the left, window wall on the right, white west wall at the far end.
+Shot B2: Camera position: standing 2 ft from the window wall, looking south. Brick wall fills the frame, ceiling beams visible overhead.
+Shot B3: Camera position: standing 2 ft from the brick wall, looking north. The factory window is centered and the light falls across the concrete.</pre>
+    </details>
+
+    <details>
+      <summary>Final "after" prompt (v3)</summary>
+<pre>Architecture &amp; Ground Truth: 16x20 ft open studio loft, 12 ft ceiling with exposed rough-sawn timber beams at 4 ft spacing and black ceiling conduit. Exactly ONE window in the whole room: the 12-pane black steel window on the north wall, 12 ft wide x 8 ft tall. Only door is on the east wall, never visible in shots looking west. Brick appears ONLY on the south wall; east, west and north walls are flat white drywall with 6-inch baseboard. Floor: polished light grey concrete.
+
+Style Ratio &amp; Core Pieces: 60% Mid-Century Modern, 25% Industrial, 15% Western Americana. Kitchenette along the south brick wall at the east end: 60-inch walnut-fronted base run, black steel pulls, honed charcoal counter, matte black bar sink with gooseneck faucet, matte black 24-inch under-counter fridge, plug-in two-burner induction cooktop, one turquoise ceramic vessel; bare brick above, no upper cabinets, no open shelving. Living zone: 84-inch cognac top-grain leather sofa with walnut legs centered on the brick wall facing the window, 3 solid pillows (two oatmeal, one burnt sienna); 48-inch walnut slab coffee table with black steel base holding one low brass bowl; tightly woven natural oatmeal wool flat-weave rug, flat pile, no jute texture, with a brown-and-white cowhide layered on top; one saddle-tan leather sling chair with walnut frame at each end of the coffee table, angled 30 degrees toward the sofa; matte black iron arc floor lamp arching over the sofa's east end. Dining: 42-inch round walnut pedestal table with two black steel and saddle-leather chairs at the east end of the window. Sleeping zone at the west end: low walnut platform bed, headboard on the west wall, oatmeal linen, burnt-sienna throw, one small walnut bedside table with an aged-brass lamp, rust-and-sand abstract canvas above the bed, 5-foot open walnut and black steel shelf divider with only a few objects, offset from the bed's foot. One 7-foot olive tree in a matte black planter at the west end of the north wall. Curated and sparse. No stainless or chrome, no faux-rustic decor, no barn wood, no animal skulls, no pouf, no books, no striped patterns.
+
+Color Palette &amp; Lighting: neutral-cool daylight white balance (~6000-6500K) on concrete and white walls, bright overcast 10:30 AM. Only the arc lamp and brass lamp cast small 2700K warm pools. Not golden hour, no orange color cast. Warm cognac, burnt sienna, saddle tan, oatmeal, walnut, aged brass.
+
+Camera &amp; Output Specs: 5-foot eye-level, 24mm full-frame wide-angle, f/8, straight verticals, ceiling beams visible, hyper-realistic leather, walnut and brick texture, architectural editorial photography, 3:2. One image per generation.
+
+Shot A1: Camera at the east wall looking west. Brick wall and kitchenette on the LEFT, window wall on the RIGHT, bed zone at the far end.</pre>
+    </details>
+  </section>
+
+  <section class="wrap" id="template">
+    <div class="sec-head">
+      <p class="eyebrow">Template</p>
+      <h2>The reusable brief</h2>
+      <p class="lede">
+        Fill this in once per project and reuse it verbatim for every image.
+        <a href="template.md">Download template.md</a>
+      </p>
+    </div>
+    <details open>
+      <summary>Six-pillar interior design brief</summary>
+<pre>### [Project Name / Concept Title]
+
+#### 1. Fixed Facts (Ground Truth)
+* Dimensions &amp; Layout: [e.g., studio loft, 16x20 ft]
+* Ceiling &amp; Architecture: [e.g., 12-ft timber-beam ceiling, large factory window facing north]
+* Walls &amp; Flooring: [e.g., exposed red brick, polished concrete floors]
+
+#### 2. Style Ratio
+* Breakdown: [e.g., 70% Mid-Century Modern, 20% Western Americana, 10% Industrial]
+
+#### 3. Palette Tied to Light
+* Light Adaptation: [e.g., countering cool north light with warm earth tones]
+
+#### 4. Key Pieces (Material + Placement)
+* Seating: [e.g., cognac top-grain leather sofa against the brick wall]
+* Textiles: [e.g., brown-and-white cowhide layered under the coffee table]
+* Lighting &amp; Decor: [e.g., matte black iron arc lamp over the seating zone]
+
+#### 5. Constraints and Exclusions
+* Constraints: [e.g., renter-friendly, moderate budget]
+* Exclusions: [e.g., no faux-rustic clutter, no chrome finishes]
+
+#### 6. Output Specification
+* Image Prompt Specs: [e.g., 5-foot eye level, wide angle, late-afternoon golden hour]
+* Text Brief Format: [e.g., room zones + markdown shopping table]</pre>
+    </details>
+  </section>
+
+  <section class="wrap" id="accuracy">
+    <div class="sec-head">
+      <p class="eyebrow">Accuracy</p>
+      <h2>How closely the final render follows the brief</h2>
+      <p class="lede">
+        Each pillar is broken into yes-or-no checks. A check scores 1 if the render matches, 0.5 if
+        it partly matches, and 0 if it does not. This is a manual visual review of one view (A1),
+        not a pixel measurement.
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pillar</th><th class="n">Checks</th><th class="n">Score</th><th>Misses</th></tr></thead>
+        <tbody>
+          <tr><td>1 &nbsp;Fixed facts</td><td class="n">8</td><td class="n">7.5</td><td>Window grid reads denser than the specified 12 panes</td></tr>
+          <tr><td>3 &nbsp;Palette and light</td><td class="n">4</td><td class="n">3.5</td><td>Time of day could pass for late afternoon</td></tr>
+          <tr><td>4 &nbsp;Key pieces</td><td class="n">20</td><td class="n">18.5</td><td>Sling chairs stacked on one side of the table instead of flanking it. Rug still reads textured</td></tr>
+          <tr><td>5 &nbsp;Constraints and exclusions</td><td class="n">7</td><td class="n">5.5</td><td>Wall-mounted open shelving and dishes appeared over the counter, which the brief excludes. Extra plants</td></tr>
+          <tr><td>6 &nbsp;Output specification</td><td class="n">5</td><td class="n">5</td><td>None</td></tr>
+          <tr class="total"><td>Total</td><td class="n">44</td><td class="n">40 (91%)</td><td>Pillar 2, the style ratio, is a judgment call and is not scored</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sec-head" style="margin-top: 44px;">
+      <h2 style="font-size: 1.35rem;">Three iterations</h2>
+    </div>
+    <div class="grid3">
+      <div class="col">
+        <span class="num">V1 · COLLAGE</span>
+        <h3>Three views on one canvas</h3>
+        <ul>
+          <li>A second window appeared</li>
+          <li>A door showed in a view where it should be behind the camera</li>
+          <li>Brick appeared on the west wall in one panel</li>
+          <li>Golden-hour orange cast instead of 10:30 AM north light</li>
+          <li>Jute rug, stray pillows, nightstands, a pouf</li>
+        </ul>
+        <p><a href="images/iteration-v1-collage.jpg">View v1</a></p>
+      </div>
+      <div class="col">
+        <span class="num">V2 · SINGLE VIEW</span>
+        <h3>Prompt patched</h3>
+        <ul>
+          <li>One window, no door, neutral light, beams visible</li>
+          <li>Extras removed</li>
+          <li>Design flaw found in the audit: a table lamp and a floor lamp stacked at one end of the brick wall, beside an arbitrary console</li>
+        </ul>
+        <p><a href="images/iteration-v2-a1.jpg">View v2</a></p>
+      </div>
+      <div class="col">
+        <span class="num">V3 · FINAL</span>
+        <h3>Brief revised</h3>
+        <ul>
+          <li>Console replaced by a kitchenette, which gives the entry end a purpose and removes the lamp stack</li>
+          <li>Brass lamp moved to the bedside</li>
+          <li>Still open: sling-chair placement, open shelving over the counter, rug texture</li>
+        </ul>
+        <p><a href="images/after-a1-v3.jpg">View v3</a></p>
+      </div>
+    </div>
+
+    <p class="callout">
+      Only view A1 has been generated and scored for v3. Views A2 and A3 still need to be
+      regenerated from the final prompt and audited the same way.
+    </p>
+  </section>
+
+  <section class="wrap" id="shopping">
+    <div class="sec-head">
+      <p class="eyebrow">Shopping list</p>
+      <h2>Suggested pieces</h2>
+      <p class="lede" id="price-note"></p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Zone</th><th>Piece</th><th>Suggested product</th><th class="n">Listed price</th></tr></thead>
+        <tbody id="shop-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span class="name">Khadijah Ellis</span>
+    <span class="meta">
+      <a href="../">Portfolio</a>
+      <a href="https://github.com/klosetk/klosetk.github.io/tree/main/brick-and-saddle-loft">Source on GitHub</a>
+      <span>Interior concept, 2026</span>
+    </span>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  var W = 1536, H = 1024;
+  var stage = document.getElementById('stage');
+  var figure = document.getElementById('figure');
+  var card = document.getElementById('card');
+  var toggle = document.getElementById('toggle');
+  var items = [], byId = {}, current = null, pinned = false, closeTimer = null, quiet = false;
+
+  function refocus(el) { quiet = true; el.focus(); quiet = false; }
+
+  function money(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function searchUrl(it) {
+    var q = it.product + (it.seller ? ' ' + it.seller : '');
+    return 'https://www.google.com/search?q=' + encodeURIComponent(q);
+  }
+  function priceLine(it) {
+    if (it.price == null) return '';
+    return it.qty > 1
+      ? 'Listed ' + money(it.price) + ' each, ' + it.qty + ' needed (' + money(it.price * it.qty) + ')'
+      : 'Listed ' + money(it.price);
+  }
+
+  function cardHtml(it) {
+    var shop;
+    if (it.product) {
+      shop = '<div class="shop"><div class="label">Suggested item</div>' +
+        '<p class="prod">' + esc(it.product) + '</p>' +
+        '<p class="price">' + esc(priceLine(it)) + (it.seller ? ' &middot; ' + esc(it.seller) : '') + '</p>' +
+        '<a class="find" href="' + searchUrl(it) + '" target="_blank" rel="noopener noreferrer">Find it &rarr;</a></div>';
+    } else {
+      shop = '<div class="shop"><div class="label">Suggested item</div>' +
+        '<p class="prod">Not sourced yet</p>' +
+        '<p class="price">The specification above is the search brief.</p></div>';
+    }
+    return '<button type="button" class="close" aria-label="Close details">&times;</button>' +
+      '<div class="zone">' + esc(it.zone) + '</div>' +
+      '<h3>' + esc(it.name) + '</h3>' +
+      '<p class="spec">' + esc(it.spec) + '</p>' + shop +
+      (it.note ? '<p class="note">' + esc(it.note) + '</p>' : '');
+  }
+
+  function place(btn) {
+    if (window.matchMedia('(max-width: 720px)').matches) { card.style.left = ''; card.style.top = ''; return; }
+    var s = figure.getBoundingClientRect(), b = btn.getBoundingClientRect();
+    var cw = card.offsetWidth, ch = card.offsetHeight;
+    var cx = b.left - s.left + b.width / 2, cy = b.top - s.top + b.height / 2;
+    var x = cx + 22;
+    if (x + cw > s.width - 8) x = cx - 22 - cw;
+    if (x < 8) x = 8;
+    var y = Math.max(8, Math.min(cy - 30, s.height - ch - 8));
+    card.style.left = x + 'px';
+    card.style.top = y + 'px';
+  }
+
+  function open(btn, pin) {
+    clearTimeout(closeTimer);
+    if (current && current !== btn) current.setAttribute('aria-expanded', 'false');
+    current = btn; pinned = !!pin;
+    card.innerHTML = cardHtml(byId[btn.dataset.id]);
+    card.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    place(btn);
+    card.querySelector('.close').addEventListener('click', function () { close(true); refocus(btn); });
+  }
+  function close(force) {
+    if (pinned && !force) return;
+    if (current) current.setAttribute('aria-expanded', 'false');
+    card.hidden = true; current = null; pinned = false;
+  }
+  function soon() { clearTimeout(closeTimer); closeTimer = setTimeout(function () { close(false); }, 180); }
+
+  function build(data) {
+    items = data.items;
+    items.forEach(function (it) { byId[it.id] = it; });
+    document.getElementById('m-count').textContent = items.length;
+    document.getElementById('price-note').textContent = data.priceNote;
+
+    items.forEach(function (it) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hs ' + (it.product ? 'sourced' : 'to-source');
+      b.dataset.id = it.id;
+      b.style.left = (it.x / W * 100) + '%';
+      b.style.top = (it.y / H * 100) + '%';
+      b.setAttribute('aria-label', it.name + ': suggested item details');
+      b.setAttribute('aria-expanded', 'false');
+      b.setAttribute('aria-controls', 'card');
+      b.addEventListener('mouseenter', function () { if (!pinned) open(b, false); });
+      b.addEventListener('mouseleave', soon);
+      b.addEventListener('focus', function () { if (!pinned && !quiet) open(b, false); });
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (current === b && pinned) close(true); else open(b, true);
+      });
+      stage.appendChild(b);
+    });
+
+    card.addEventListener('mouseenter', function () { clearTimeout(closeTimer); });
+    card.addEventListener('mouseleave', soon);
+    document.addEventListener('click', function (e) {
+      if (!card.hidden && !card.contains(e.target)) close(true);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !card.hidden) { var c = current; close(true); if (c) refocus(c); }
+    });
+    window.addEventListener('resize', function () { if (current) place(current); });
+
+    var body = document.getElementById('shop-body'), sub = 0, rows = '';
+    var order = ['Kitchenette', 'Living', 'Dining', 'Sleeping'];
+    order.forEach(function (z) {
+      items.filter(function (it) { return it.zone === z; }).forEach(function (it) {
+        var price = it.price != null ? money(it.price * it.qty) : '&mdash;';
+        if (it.price != null) sub += it.price * it.qty;
+        var prod = it.product
+          ? esc(it.product) + (it.seller ? '<span class="sub">' + esc(it.seller) + '</span>' : '') +
+            '<span class="sub"><a href="' + searchUrl(it) + '" target="_blank" rel="noopener noreferrer">Find it</a>' +
+            (it.qty > 1 ? ' &middot; qty ' + it.qty : '') + '</span>'
+          : '<span class="tag">' + (it.status === 'planned' ? 'In accents reserve' : 'To source') + '</span>';
+        rows += '<tr><td>' + esc(z) + '</td><td>' + esc(it.name) + '</td><td>' + prod + '</td><td class="n">' + price + '</td></tr>';
+      });
+    });
+    rows += '<tr class="total"><td colspan="3">Subtotal of sourced pieces (excludes kitchenette, bedside table, divider, art, bedding, tax, delivery, mattress)</td><td class="n">' + money(sub) + '</td></tr>';
+    body.innerHTML = rows;
+  }
+
+  toggle.addEventListener('click', function () {
+    var off = stage.classList.toggle('markers-off');
+    toggle.textContent = off ? 'Show markers' : 'Hide markers';
+    if (off) close(true);
+  });
+
+  fetch('items.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(build)
+    .catch(function () {
+      document.getElementById('price-note').textContent = 'The item data could not be loaded. Reload the page, or see shopping.md in the repository.';
+    });
+})();
+</script>
+</body>
+</html>
