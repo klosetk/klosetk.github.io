@@ -30,6 +30,14 @@
 
   toggle.addEventListener('click', function (e) { e.stopPropagation(); closeMore(null); setPanel(panel.hidden); });
   panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) setPanel(false); });
+  // The current page's entry in More projects goes to the top of this page instead of doing nothing.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('.sn-drop a[aria-current="page"]') : null;
+    if (!a) return;
+    e.preventDefault();
+    closeMore(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   document.addEventListener('click', function (e) {
     if (!bar.contains(e.target)) setPanel(false);
     var inside = e.target.closest ? e.target.closest('.sn-more') : null;
