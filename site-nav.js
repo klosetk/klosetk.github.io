@@ -1,11 +1,11 @@
-/* Shared navigation menu: scroll-aware section links, a compact sticky bar, and a More projects dropdown. */
+/* Shared navigation menu: a sticky bar at the top of every page, scroll-aware section links, and a More projects dropdown. */
 (function () {
   var menu = document.querySelector('.sn-static');
   if (!menu) return;
   var links = [].slice.call(menu.querySelectorAll('.sn-links a[href^="#"]'));
   var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
 
-  // Compact bar
+  // Sticky bar
   var bar = document.createElement('div');
   bar.className = 'sn-bar';
   bar.innerHTML =
@@ -13,12 +13,12 @@
       '<button type="button" class="sn-btn has-chev" aria-expanded="false" aria-controls="sn-panel"><span class="sn-burger" aria-hidden="true"></span>Navigation menu</button>' +
       '<span class="sn-now"></span>' +
     '</div>' +
-    '<div class="sn-panel wrap" id="sn-panel" hidden></div>';
-  var toggle = bar.querySelector('.sn-btn'), now = bar.querySelector('.sn-now'), panel = bar.querySelector('.sn-panel');
-  var copies = links.map(function (a) { var c = a.cloneNode(true); panel.appendChild(c); return c; });
+    '<div class="sn-pop" id="sn-panel" hidden><div class="sn-panel wrap"></div></div>';
+  var toggle = bar.querySelector('.sn-btn'), now = bar.querySelector('.sn-now'), panel = bar.querySelector('.sn-pop'), list = bar.querySelector('.sn-panel');
+  var copies = links.map(function (a) { var c = a.cloneNode(true); list.appendChild(c); return c; });
   var more = menu.querySelector('.sn-more');
   if (more) bar.querySelector('.sn-bar-in').appendChild(more.cloneNode(true));
-  document.body.appendChild(bar);
+  document.body.insertBefore(bar, document.body.firstChild);
 
   function setPanel(open) {
     panel.hidden = !open;
@@ -57,8 +57,6 @@
   var last = -2, ticking = false;
   function update() {
     ticking = false;
-    bar.classList.toggle('show', menu.getBoundingClientRect().bottom < 0);
-    if (!bar.classList.contains('show')) setPanel(false);
     var y = window.scrollY + 120, cur = -1;
     targets.forEach(function (el, i) { if (el && el.getBoundingClientRect().top + window.scrollY <= y) cur = i; });
     if (cur === last) return;

@@ -7,7 +7,7 @@ section[id], .part[id] { scroll-margin-top: 12px; }
   :root { --sn-line: color-mix(in srgb, var(--ink-3) 50%, transparent); }
 }
 
-/* Static menu: sits under the hero */
+/* Boxed menu: sits under the hero */
 .sn-static { margin-top: clamp(24px, 4vh, 40px); }
 .sn-card { border: 1px solid var(--sn-line); border-radius: 14px; background: var(--surface); padding: 16px 18px 18px; }
 .sn-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
@@ -53,17 +53,19 @@ section[id], .part[id] { scroll-margin-top: 12px; }
 .sn-drop strong { display: block; font-size: 14.5px; font-weight: 600; }
 .sn-drop .d { display: block; margin-top: 2px; font-size: 12.5px; color: var(--ink-3); }
 
-/* Compact bar that appears after the static menu scrolls away (built by site-nav.js) */
+/* Menu bar: sticky at the top of the page from the first paint (built by site-nav.js) */
 .sn-bar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 30; background: var(--ground);
+  position: sticky; top: 0; z-index: 30; background: var(--ground);
   border-bottom: 1px solid var(--sn-line); padding-top: env(safe-area-inset-top, 0px);
-  transform: translateY(-110%); visibility: hidden; transition: transform .2s ease, visibility 0s .2s;
 }
-.sn-bar.show { transform: none; visibility: visible; transition: transform .2s ease; }
 .sn-bar .sn-bar-in { display: flex; align-items: center; gap: 12px; padding-top: 9px; padding-bottom: 9px; }
 .sn-now { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; color: var(--ink-3); }
-.sn-bar .sn-panel { padding-top: 2px; padding-bottom: 14px; max-height: 55vh; overflow-y: auto; }
-.sn-panel[hidden] { display: none; }
+.sn-pop {
+  position: absolute; left: 0; right: 0; top: 100%; background: var(--ground); border-bottom: 1px solid var(--sn-line);
+  box-shadow: var(--shadow, 0 10px 34px rgba(42, 35, 64, .22)); max-height: 60vh; overflow-y: auto;
+}
+.sn-pop[hidden] { display: none; }
+.sn-pop .sn-panel { padding-top: 4px; padding-bottom: 16px; }
 
 @media (max-width: 560px) {
   .sn-now { display: none; }
@@ -72,5 +74,4 @@ section[id], .part[id] { scroll-margin-top: 12px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .sn-bar, .sn-bar.show { transition: none; }
 }
