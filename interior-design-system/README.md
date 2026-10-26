@@ -1,10 +1,10 @@
-# Brick & Saddle Loft
+# Interior Design System
 
-A 320 sq ft loft lookbook built from a structured design brief. Every render is checked against that brief, and every piece in the final view links to a suggested product.
+A repeatable system for AI interior design: lock the room, write a six-pillar brief, prompt from it, and score every render against it. The case study is the Brick & Saddle Loft, a 320 sq ft loft where every piece in the final view links to a suggested product.
 
 ![Final render, view A1](images/after-a1-v3.jpg)
 
-**Interactive version:** [klosetk.github.io/brick-and-saddle-loft](https://klosetk.github.io/brick-and-saddle-loft/). Hover, tap, or tab to the dots on the image to see each piece's spec and what to shop for.
+**Interactive version:** [klosetk.github.io/interior-design-system](https://klosetk.github.io/interior-design-system/). Hover, tap, or tab to the dots on the image to see each piece's spec and what to shop for.
 
 ## What's in this folder
 
