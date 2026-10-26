@@ -22,6 +22,8 @@ Shot lines (add one to the block):
 
 The capped plumbing stubs were added to the shell when a kitchenette replaced a console, because a sink is a fixed fact that has to exist in the "before" image too.
 
+B1 has been generated (`images/before-b1.jpg`) and scored in `accuracy.md`. B2 and B3 have not. The audit found four misses, and the patch lines for them are listed there. Add them to the shell block before regenerating.
+
 ## "After": final prompt (v3)
 
 ```

@@ -110,3 +110,46 @@ The written brief is broken into yes-or-no checks, one per specified fact. Each 
 | | Rug still reads textured | Open |
 | | Window grid denser than 12 panes | Open |
 | | Views A2 and A3 not generated for v3 | Open |
+
+## Before: the empty shell (view B1)
+
+The same method, applied to `images/before-b1.jpg` against the Fixed Facts and the locked shell prompt. Manual visual review, so treat the numbers as approximate.
+
+**Total: 21.5 / 25 (86%).**
+
+| Check | Score |
+| --- | --- |
+| Completely empty: no furniture, decor, or people | 1 |
+| Exactly one window | 1 |
+| Window on the north wall (right-hand side looking west) | 1 |
+| Window has a 12-pane grid | 0.5 |
+| Window about 12 ft wide and 8 ft tall, sill about 2.5 ft up | 1 |
+| Brick on the south wall only (left-hand side) | 1 |
+| East, west, and north walls are flat white drywall | 1 |
+| Painted baseboard about 6 in. on the white walls | 1 |
+| Exposed timber beams visible, ceiling reads about 12 ft | 1 |
+| Beams run north-south at about 4 ft spacing | 0.5 |
+| Black conduit along the beams | 1 |
+| Polished light grey concrete with trowel marks and hairline cracks | 1 |
+| Two copper supply stubs on the south brick wall | 1 |
+| Capped drain stub on the south wall | 0.5 |
+| Stubs sit about 6 in. above the floor | 0 |
+| Stubs about 30 in. from the east wall | 0.5 |
+| Exposed outlet box beside the stubs | 0.5 |
+| Neutral-cool overcast daylight, soft shadows, no direct sun | 1 |
+| Not golden hour, no orange cast | 1 |
+| 5-ft eye-level viewpoint | 1 |
+| Wide-angle (about 24 mm) perspective | 1 |
+| Straight verticals | 1 |
+| 3:2 aspect ratio (1536 x 1024) | 1 |
+| Orientation matches shot B1 (brick left, window right, white west wall at the far end) | 1 |
+| No door visible in a view looking west | 1 |
+
+Misses and the prompt patch each one calls for (not yet regenerated):
+
+| Miss | Patch line |
+| --- | --- |
+| Window reads about 20 panes | `Window grid: exactly 12 panes, 4 columns by 3 rows.` |
+| Primary beams run along the room | `Primary timber beams run north-south, crosswise across the room from left to right as seen from the east wall. No beams run along the length of the room.` |
+| Supply stubs about 3 ft up the wall | `All three stubs sit low, 6 inches above the floor at baseboard height, none at waist height.` |
+| Drain and outlet read loosely | `The drain is a short capped pipe rising 6 inches from the floor. The outlet is a surface-mounted metal box.` |
