@@ -165,7 +165,18 @@
   }
   .caption { margin: 14px 0 0; font-size: 14px; color: var(--ink-3); max-width: 70ch; }
 
-  .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-top: 26px; font-family: var(--mono); font-size: 12.5px; }
+  html { scroll-behavior: smooth; }
+  .jump { position: sticky; top: 0; z-index: 20; margin-top: 20px; background: var(--ground); border-bottom: 1px solid var(--hairline); border-top: 1px solid var(--hairline); }
+  .jump .row {
+    position: relative; max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter);
+    display: flex; align-items: center; gap: 0 20px; overflow-x: auto; white-space: nowrap;
+    font-family: var(--mono); font-size: 12.5px; scrollbar-width: none;
+  }
+  .jump .row::-webkit-scrollbar { display: none; }
+  .jump a { padding: 14px 0 12px; color: var(--ink-2); border-bottom: 2px solid transparent; flex: none; }
+  .jump a:hover { color: var(--ink); text-decoration: none; }
+  .jump a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .jump .grp { flex: none; margin-left: 10px; padding-left: 20px; border-left: 1px solid var(--hairline); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
   .part { padding-top: clamp(64px, 9vh, 110px); }
   .part .inner { border-top: 2px solid var(--ink); padding-top: 22px; }
   .part h2 { margin: 10px 0 0; font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
@@ -237,6 +248,7 @@
     .legend button { margin-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
     * { animation: none !important; transition: none !important; }
   }
 </style>
@@ -258,11 +270,20 @@
       <div class="metric"><span class="fig">91%</span><span class="cap">Final render's match to the brief (manual audit, 40 of 44 checks)</span></div>
       <div class="metric"><span class="fig" id="m-count">19</span><span class="cap">Pieces specified and shoppable in the loft case study</span></div>
     </div>
-    <nav class="jump" aria-label="Page sections">
-      <a href="#problem">The problem</a><a href="#intake">The system</a><a href="#case-study">The loft</a><a href="#next">Next: the app</a>
-    </nav>
     <a class="back" href="../">&larr; Back to portfolio</a>
   </header>
+
+  <nav class="jump" aria-label="Jump to a section">
+    <div class="row" id="jump-row">
+      <a href="#problem">Problem</a>
+      <span class="grp">System</span>
+      <a href="#intake">Lock the room</a><a href="#brief">Brief</a><a href="#strategy">Prompt</a><a href="#audit">Audit</a><a href="#template">Template</a>
+      <span class="grp">Loft</span>
+      <a href="#shell">Before</a><a href="#prompts">Prompts</a><a href="#final-output">Final Output</a><a href="#accuracy">Results</a><a href="#shopping">Shopping</a>
+      <span class="grp">App</span>
+      <a href="#next">Next</a>
+    </div>
+  </nav>
 
   <section class="wrap" id="problem">
     <div class="sec-head">
@@ -436,35 +457,6 @@
     <p class="caption">This shell was written from a description, not a drawing.</p>
   </section>
 
-  <section class="wrap" id="look">
-    <div class="sec-head">
-      <p class="eyebrow">Case study &nbsp;·&nbsp; The look</p>
-      <h2>Hover, tap, or tab to the dots to see what to buy</h2>
-      <p class="lede">
-        Each marker opens the piece's specification and the suggested product to shop for. Colored
-        markers have a sourced product. Grey markers are specified but not sourced yet.
-      </p>
-    </div>
-
-    <div class="figure" id="figure">
-      <div class="stage" id="stage">
-        <img src="images/after-a1-v3.jpg" width="1536" height="1024"
-             alt="Rendered view of the finished loft: a walnut kitchenette along a red brick wall on the left, a cognac leather sofa with an arc floor lamp, a cowhide-layered wool rug, two leather sling chairs, a bed and olive tree at the far end, and a black steel factory window on the right.">
-      </div>
-      <aside class="card" id="card" role="region" aria-label="Item details" aria-live="polite" hidden></aside>
-    </div>
-
-    <div class="legend">
-      <span><span class="dot s"></span>Sourced product</span>
-      <span><span class="dot t"></span>Spec only</span>
-      <button type="button" id="toggle">Hide markers</button>
-    </div>
-    <p class="caption">
-      View A1: camera at the east wall looking west, 5-ft eye level, 24 mm. The brick south wall
-      is on the left and the north window is on the right.
-    </p>
-  </section>
-
   <section class="wrap" id="prompts">
     <div class="sec-head">
       <p class="eyebrow">Case study &nbsp;·&nbsp; Prompts</p>
@@ -496,6 +488,36 @@ Camera &amp; Output Specs: 5-foot eye-level, 24mm full-frame wide-angle, f/8, st
 
 Shot A1: Camera at the east wall looking west. Brick wall and kitchenette on the LEFT, window wall on the RIGHT, bed zone at the far end.</pre>
     </details>
+  </section>
+
+  <section class="wrap" id="final-output">
+    <div class="sec-head">
+      <p class="eyebrow">Case study &nbsp;·&nbsp; After</p>
+      <h2>Final Output</h2>
+      <p class="lede">
+        Generated from the locked shell and the v3 prompt above: one image, shot line A1. Hover,
+        tap, or tab to a marker for the piece's specification and the suggested product. Colored
+        markers have a sourced product. Grey markers are specified but not sourced yet.
+      </p>
+    </div>
+
+    <div class="figure" id="figure">
+      <div class="stage" id="stage">
+        <img src="images/after-a1-v3.jpg" width="1536" height="1024"
+             alt="Rendered view of the finished loft: a walnut kitchenette along a red brick wall on the left, a cognac leather sofa with an arc floor lamp, a cowhide-layered wool rug, two leather sling chairs, a bed and olive tree at the far end, and a black steel factory window on the right.">
+      </div>
+      <aside class="card" id="card" role="region" aria-label="Item details" aria-live="polite" hidden></aside>
+    </div>
+
+    <div class="legend">
+      <span><span class="dot s"></span>Sourced product</span>
+      <span><span class="dot t"></span>Spec only</span>
+      <button type="button" id="toggle">Hide markers</button>
+    </div>
+    <p class="caption">
+      View A1: camera at the east wall looking west, 5-ft eye level, 24 mm. The brick south wall
+      is on the left and the north window is on the right.
+    </p>
   </section>
 
   <section class="wrap" id="accuracy">
@@ -747,6 +769,34 @@ Shot A1: Camera at the east wall looking west. Brick wall and kitchenette on the
     .catch(function () {
       document.getElementById('price-note').textContent = 'The item data could not be loaded. Reload the page, or see shopping.md in the repository.';
     });
+})();
+</script>
+
+<script>
+(function () {
+  var row = document.getElementById('jump-row');
+  var map = [].slice.call(document.querySelectorAll('.jump a[href^="#"]')).map(function (a) {
+    return { a: a, el: document.getElementById(a.getAttribute('href').slice(1)) };
+  }).filter(function (m) { return m.el; });
+  var last = null, ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.scrollY + 90, cur = null;
+    map.forEach(function (m) { if (m.el.getBoundingClientRect().top + window.scrollY <= y) cur = m; });
+    if (cur === last) return;
+    last = cur;
+    map.forEach(function (m) {
+      if (m === cur) m.a.setAttribute('aria-current', 'true'); else m.a.removeAttribute('aria-current');
+    });
+    if (cur && row) {
+      var a = cur.a;
+      if (a.offsetLeft < row.scrollLeft + 8 || a.offsetLeft + a.offsetWidth > row.scrollLeft + row.clientWidth - 8) {
+        row.scrollLeft = Math.max(0, a.offsetLeft - 40);
+      }
+    }
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
 })();
 </script>
 </body>
