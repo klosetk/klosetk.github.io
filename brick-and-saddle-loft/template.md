@@ -8,6 +8,8 @@ Fill this in once per project. Reuse it verbatim in every image prompt so rooms,
 * **Dimensions & Layout:** [e.g., Studio loft, 16x20 ft]
 * **Ceiling & Architecture:** [e.g., 12-ft timber-beam ceiling, large factory window facing North]
 * **Walls & Flooring:** [e.g., Original exposed red brick, polished concrete floors]
+* **Openings & Services:** [door and window positions measured from a named corner; plumbing and electrical locations]
+* **Source:** [floor plan upload, measured, or assumed. Mark each fact `[plan]`, `[calc]`, or `[assumed]`]
 
 #### 2. Style Ratio
 * **Breakdown:** [e.g., 70% Mid-Century Modern, 20% Western Americana, 10% Industrial]
@@ -29,6 +31,21 @@ Fill this in once per project. Reuse it verbatim in every image prompt so rooms,
 * **Text Brief Format:** [e.g., Room zones + markdown shopping table]
 
 ---
+
+## Starting from a floor plan
+
+If you have a floor plan, blueprint, survey, or CAD export (image or PDF), upload it and extract the Fixed Facts from it instead of typing them.
+
+1. **Set the scale.** Use a scale bar, a stated scale, or one labeled dimension. Never infer scale from furniture. If none exists, supply one known dimension.
+2. **Extract the facts.** Room dimensions, wall positions and thickness, door and window positions from a named corner, widths and door swing, ceiling height (often missing, so check sections and notes), plumbing, outlets, panels, columns, beams, stairs, built-ins, north arrow, and finishes from the legend.
+3. **Label every fact** as `[plan]` (read directly), `[calc]` (derived), or `[assumed]` (not on the plan). Ask only for what is critical and missing: north orientation, ceiling height, window sill height, which wall is brick.
+4. **Cross-check.** Dimensions add up, openings fit their walls, the scale is consistent, and the plan agrees with the written description. Resolve conflicts before anything is generated.
+5. **Set one coordinate system.** Pick an origin corner and axes and use them for every piece and every camera. Write each camera as a position, a look direction, and which wall is on the left and right.
+6. **Convert to text.** Put the confirmed facts into the shell prompt in words. Image models do not follow drawn plans reliably, so the plan is the source of geometry, not an image reference.
+7. **Lock it.** Changing a fixed fact later, such as adding a sink that needs plumbing, means updating the shell and regenerating the "before" images.
+8. **Redact before publishing.** Plans can carry addresses, names, and permit numbers.
+
+This project's shell was specified from a written description, not a drawing.
 
 ## Rules that made the prompts reliable
 

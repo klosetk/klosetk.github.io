@@ -300,6 +300,22 @@
       <div class="fact"><dt>Plumbing</dt><dd>Capped supply and drain stubs on the south wall, about 30 in. from the east wall (added when the kitchenette replaced a console)</dd></div>
       <div class="fact"><dt>Light</dt><dd>Neutral-cool, about 6000 to 6500K, bright overcast, 10:30 AM</dd></div>
     </dl>
+
+    <div class="sec-head" style="margin-top: 44px;">
+      <h2 style="font-size: 1.35rem;">Starting from a real floor plan</h2>
+      <p class="lede">
+        This shell was written from a description. For a real space, upload the blueprint and the
+        same facts are extracted from it.
+      </p>
+    </div>
+    <ol class="principles">
+      <li><div><strong>Set the scale</strong><span>Read a scale bar, a stated scale, or one labeled dimension. Scale is never inferred from furniture.</span></div></li>
+      <li><div><strong>Extract the fixed facts</strong><span>Room dimensions, wall thickness, door and window positions from a named corner, plumbing and electrical, columns, stairs, and finishes from the legend. Ceiling height is often missing from plans, so sections and notes are checked.</span></div></li>
+      <li><div><strong>Label every fact</strong><span>Read from the plan, calculated, or assumed. Only critical gaps get a question: north orientation, ceiling height, sill height, which wall is brick.</span></div></li>
+      <li><div><strong>Cross-check</strong><span>Dimensions add up, openings fit their walls, and the plan agrees with the description. Conflicts are settled before any image is generated.</span></div></li>
+      <li><div><strong>Convert to coordinates and text</strong><span>One origin and one set of axes for every piece and camera. The plan goes into the prompt as words, because image models do not follow drawn plans reliably.</span></div></li>
+    </ol>
+    <p class="callout">Plans can carry addresses, names, and permit numbers. Redact them before a plan is shown publicly.</p>
   </section>
 
   <section class="wrap" id="brief">
@@ -308,7 +324,7 @@
       <h2>Six pillars, filled in before any image is generated</h2>
     </div>
     <div class="grid3">
-      <div class="col"><span class="num">01</span><h3>Fixed facts</h3><p>Dimensions, ceiling, window, walls, floor. Treated as unchangeable across every prompt.</p></div>
+      <div class="col"><span class="num">01</span><h3>Fixed facts</h3><p>Dimensions, ceiling, window, walls, floor, openings and services. Typed in, measured, or extracted from an uploaded floor plan. Treated as unchangeable across every prompt.</p></div>
       <div class="col"><span class="num">02</span><h3>Style ratio</h3><p><strong>60% Mid-Century Modern, 25% Industrial, 15% Western Americana.</strong> The industrial share comes from the building. The Western share is carried by material only: saddle leather, cowhide, aged brass.</p></div>
       <div class="col"><span class="num">03</span><h3>Palette tied to light</h3><p>North light is cool and flat, so the palette runs warm: cognac, burnt sienna, saddle tan, oatmeal, walnut, aged brass, with 2700K lamps as the only warm pools.</p></div>
       <div class="col"><span class="num">04</span><h3>Key pieces</h3><p>Every piece is written as material plus placement, for example "84-inch cognac top-grain leather sofa centered on the brick wall facing the window."</p></div>
@@ -376,6 +392,8 @@ Shot A1: Camera at the east wall looking west. Brick wall and kitchenette on the
 * Dimensions &amp; Layout: [e.g., studio loft, 16x20 ft]
 * Ceiling &amp; Architecture: [e.g., 12-ft timber-beam ceiling, large factory window facing north]
 * Walls &amp; Flooring: [e.g., exposed red brick, polished concrete floors]
+* Openings &amp; Services: [door and window positions from a named corner; plumbing and electrical locations]
+* Source: [floor plan upload, measured, or assumed; mark each fact [plan], [calc], or [assumed]]
 
 #### 2. Style Ratio
 * Breakdown: [e.g., 70% Mid-Century Modern, 20% Western Americana, 10% Industrial]
