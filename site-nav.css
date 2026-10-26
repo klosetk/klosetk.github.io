@@ -1,0 +1,76 @@
+/* Shared navigation menu for every page on this site. */
+html { scroll-behavior: smooth; }
+section[id], .part[id] { scroll-margin-top: 12px; }
+
+:root { --sn-line: var(--hairline); }
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+  :root { --sn-line: color-mix(in srgb, var(--ink-3) 50%, transparent); }
+}
+
+/* Static menu: sits under the hero */
+.sn-static { margin-top: clamp(24px, 4vh, 40px); }
+.sn-card { border: 1px solid var(--sn-line); border-radius: 14px; background: var(--surface); padding: 16px 18px 18px; }
+.sn-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.sn-title { margin: 0; font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+
+.sn-links, .sn-panel { display: flex; flex-wrap: wrap; gap: 8px; }
+.sn-links a, .sn-panel a {
+  display: inline-block; padding: 8px 14px; border: 1px solid var(--sn-line); border-radius: 8px;
+  background: var(--ground); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.2;
+}
+.sn-links a:hover, .sn-panel a:hover { border-color: var(--accent); color: var(--accent-ink); text-decoration: none; }
+.sn-links a[aria-current="true"], .sn-panel a[aria-current="true"] { border-color: var(--accent); background: var(--chip-bg); font-weight: 600; }
+
+/* Boxed buttons */
+.sn-btn, .sn-more > summary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--sn-line);
+  border-radius: 8px; background: var(--surface); color: var(--ink); font: 600 14px/1.2 var(--sans);
+  cursor: pointer; list-style: none;
+}
+.sn-more > summary { display: flex; }
+.sn-more > summary::-webkit-details-marker { display: none; }
+.sn-btn:hover, .sn-more > summary:hover { border-color: var(--accent); }
+.sn-more > summary::after, .sn-btn.has-chev::after {
+  content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px); margin-left: 2px;
+}
+.sn-more[open] > summary, .sn-btn[aria-expanded="true"] { border-color: var(--accent); }
+.sn-burger { width: 14px; height: 2px; background: currentColor; box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor; }
+.sn-btn:focus-visible, .sn-more > summary:focus-visible, .sn-links a:focus-visible, .sn-panel a:focus-visible, .sn-drop a:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+
+/* More projects dropdown */
+.sn-more { position: relative; }
+.sn-drop {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; width: min(340px, calc(100vw - 32px));
+  background: var(--surface); border: 1px solid var(--sn-line); border-radius: 12px; padding: 6px;
+  box-shadow: var(--shadow, 0 10px 34px rgba(42, 35, 64, .22));
+}
+.sn-drop a { display: block; padding: 10px 12px; border-radius: 8px; color: var(--ink); }
+.sn-drop a:hover { background: var(--chip-bg); text-decoration: none; }
+.sn-drop a[aria-current="page"] { background: var(--chip-bg); }
+.sn-drop strong { display: block; font-size: 14.5px; font-weight: 600; }
+.sn-drop .d { display: block; margin-top: 2px; font-size: 12.5px; color: var(--ink-3); }
+
+/* Compact bar that appears after the static menu scrolls away (built by site-nav.js) */
+.sn-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30; background: var(--ground);
+  border-bottom: 1px solid var(--sn-line); padding-top: env(safe-area-inset-top, 0px);
+  transform: translateY(-110%); visibility: hidden; transition: transform .2s ease, visibility 0s .2s;
+}
+.sn-bar.show { transform: none; visibility: visible; transition: transform .2s ease; }
+.sn-bar .sn-bar-in { display: flex; align-items: center; gap: 12px; padding-top: 9px; padding-bottom: 9px; }
+.sn-now { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; color: var(--ink-3); }
+.sn-bar .sn-panel { padding-top: 2px; padding-bottom: 14px; max-height: 55vh; overflow-y: auto; }
+.sn-panel[hidden] { display: none; }
+
+@media (max-width: 560px) {
+  .sn-now { display: none; }
+  .sn-bar .sn-bar-in { justify-content: space-between; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sn-bar, .sn-bar.show { transition: none; }
+}

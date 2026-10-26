@@ -108,7 +108,7 @@
 
   .hero {
     background: var(--glow);
-    padding: clamp(68px, 10vh, 124px) 0 clamp(44px, 6vh, 68px);
+    padding: clamp(68px, 10vh, 124px) var(--gutter) clamp(44px, 6vh, 68px);
     text-align: center;
   }
 
@@ -409,6 +409,7 @@
     * { animation: none !important; transition: none !important; }
   }
 </style>
+<link rel="stylesheet" href="site-nav.css">
 </head>
 <body>
 
@@ -446,7 +447,17 @@
     </div>
   </header>
 
-  <section class="wrap">
+  <nav class="sn-static wrap" aria-label="Navigation menu">
+    <div class="sn-card">
+      <div class="sn-head">
+        <p class="sn-title">Navigation menu</p>
+        <details class="sn-more"><summary>More projects</summary><div class="sn-drop"><a href="./" aria-current="page"><strong>Portfolio home</strong><span class="d">IT automation, identity, and Jira administration</span></a><a href="brick-and-saddle-loft/"><strong>Interior Design System</strong><span class="d">AI prompt architecture, tested on a loft</span></a><a href="https://github.com/klosetk/it-automation-portfolio" target="_blank" rel="noopener noreferrer"><strong>Architecture write-ups</strong><span class="d">IT automation write-ups on GitHub</span></a></div></details>
+      </div>
+      <div class="sn-links"><a href="#practice">Practice</a><a href="#ai-automation">AI &amp; automation</a><a href="#systems">Systems engineering</a><a href="#jira">Jira administration</a><a href="#tooling">Tooling</a><a href="#docs">Documentation</a></div>
+    </div>
+  </nav>
+
+  <section class="wrap" id="practice">
     <div class="sec-head">
       <p class="eyebrow">Practice</p>
       <h2>Three layers of the same problem</h2>
@@ -478,7 +489,7 @@
     </div>
   </section>
 
-  <section class="wrap">
+  <section class="wrap" id="ai-automation">
     <div class="sec-head">
       <p class="eyebrow">Selected work &nbsp;·&nbsp; AI &amp; automation architecture</p>
       <h2>Systems that decide, route, and provision on their own</h2>
@@ -651,7 +662,7 @@
     </div>
   </section>
 
-  <section class="wrap">
+  <section class="wrap" id="systems">
     <div class="sec-head">
       <p class="eyebrow">Selected work &nbsp;·&nbsp; Systems engineering &amp; administration</p>
       <h2>Fleet, identity, and the audits that hold them together</h2>
@@ -802,7 +813,7 @@
     </div>
   </section>
 
-  <section class="wrap">
+  <section class="wrap" id="jira">
     <div class="sec-head">
       <p class="eyebrow">Platform administration</p>
       <h2>Jira administration: IT Help Desk</h2>
@@ -950,7 +961,7 @@
     </div>
   </section>
 
-  <section class="wrap">
+  <section class="wrap" id="tooling">
     <div class="sec-head">
       <p class="eyebrow">Platforms</p>
       <h2>Tooling</h2>
@@ -984,7 +995,7 @@
     </dl>
   </section>
 
-  <section class="wrap">
+  <section class="wrap" id="docs">
     <div class="sec-head">
       <p class="eyebrow">Documentation &amp; enablement</p>
       <h2>A system nobody else can run isn't finished</h2>
@@ -1034,5 +1045,6 @@
   </footer>
 
 </main>
+<script src="site-nav.js"></script>
 </body>
 </html>

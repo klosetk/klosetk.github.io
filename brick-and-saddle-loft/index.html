@@ -77,7 +77,7 @@
   .back { display: inline-block; margin-top: 22px; font-family: var(--mono); font-size: 12.5px; }
 
   /* Hero */
-  .hero { background: var(--glow); padding: clamp(40px, 7vh, 84px) 0 clamp(36px, 5vh, 56px); text-align: center; }
+  .hero { background: var(--glow); padding: clamp(40px, 7vh, 84px) var(--gutter) clamp(36px, 5vh, 56px); text-align: center; }
   .hero h1 {
     margin: 20px 0 0; font-size: clamp(2.4rem, 6.4vw, 4.4rem); font-weight: 700;
     letter-spacing: -0.038em; line-height: 1.02; text-wrap: balance;
@@ -165,18 +165,6 @@
   }
   .caption { margin: 14px 0 0; font-size: 14px; color: var(--ink-3); max-width: 70ch; }
 
-  html { scroll-behavior: smooth; }
-  .jump { position: sticky; top: 0; z-index: 20; margin-top: 20px; background: var(--ground); border-bottom: 1px solid var(--hairline); border-top: 1px solid var(--hairline); }
-  .jump .row {
-    position: relative; max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter);
-    display: flex; align-items: center; gap: 0 20px; overflow-x: auto; white-space: nowrap;
-    font-family: var(--mono); font-size: 12.5px; scrollbar-width: none;
-  }
-  .jump .row::-webkit-scrollbar { display: none; }
-  .jump a { padding: 14px 0 12px; color: var(--ink-2); border-bottom: 2px solid transparent; flex: none; }
-  .jump a:hover { color: var(--ink); text-decoration: none; }
-  .jump a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
-  .jump .grp { flex: none; margin-left: 10px; padding-left: 20px; border-left: 1px solid var(--hairline); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
   .part { padding-top: clamp(64px, 9vh, 110px); }
   .part .inner { border-top: 2px solid var(--ink); padding-top: 22px; }
   .part h2 { margin: 10px 0 0; font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
@@ -248,10 +236,10 @@
     .legend button { margin-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
     * { animation: none !important; transition: none !important; }
   }
 </style>
+<link rel="stylesheet" href="../site-nav.css">
 </head>
 <body>
 <main>
@@ -273,15 +261,13 @@
     <a class="back" href="../">&larr; Back to portfolio</a>
   </header>
 
-  <nav class="jump" aria-label="Jump to a section">
-    <div class="row" id="jump-row">
-      <a href="#problem">Problem</a>
-      <span class="grp">System</span>
-      <a href="#intake">Lock the room</a><a href="#brief">Brief</a><a href="#strategy">Prompt</a><a href="#audit">Audit</a><a href="#template">Template</a>
-      <span class="grp">Loft</span>
-      <a href="#shell">Before</a><a href="#prompts">Prompts</a><a href="#final-output">Final Output</a><a href="#accuracy">Results</a><a href="#shopping">Shopping</a>
-      <span class="grp">App</span>
-      <a href="#next">Next</a>
+  <nav class="sn-static wrap" aria-label="Navigation menu">
+    <div class="sn-card">
+      <div class="sn-head">
+        <p class="sn-title">Navigation menu</p>
+        <details class="sn-more"><summary>More projects</summary><div class="sn-drop"><a href="../"><strong>Portfolio home</strong><span class="d">IT automation, identity, and Jira administration</span></a><a href="./" aria-current="page"><strong>Interior Design System</strong><span class="d">AI prompt architecture, tested on a loft</span></a><a href="https://github.com/klosetk/it-automation-portfolio" target="_blank" rel="noopener noreferrer"><strong>Architecture write-ups</strong><span class="d">IT automation write-ups on GitHub</span></a></div></details>
+      </div>
+      <div class="sn-links"><a href="#problem">Problem</a><a href="#intake">Lock the room</a><a href="#brief">Brief</a><a href="#strategy">Prompt</a><a href="#audit">Audit</a><a href="#template">Template</a><a href="#shell">Before</a><a href="#prompts">Prompts</a><a href="#final-output">Final Output</a><a href="#accuracy">Results</a><a href="#shopping">Shopping</a><a href="#next">Next</a></div>
     </div>
   </nav>
 
@@ -624,6 +610,7 @@ Shot A1: Camera at the east wall looking west. Brick wall and kitchenette on the
 
 </main>
 
+<script src="../site-nav.js"></script>
 <script>
 (function () {
   var W = 1536, H = 1024;
@@ -772,32 +759,5 @@ Shot A1: Camera at the east wall looking west. Brick wall and kitchenette on the
 })();
 </script>
 
-<script>
-(function () {
-  var row = document.getElementById('jump-row');
-  var map = [].slice.call(document.querySelectorAll('.jump a[href^="#"]')).map(function (a) {
-    return { a: a, el: document.getElementById(a.getAttribute('href').slice(1)) };
-  }).filter(function (m) { return m.el; });
-  var last = null, ticking = false;
-  function update() {
-    ticking = false;
-    var y = window.scrollY + 90, cur = null;
-    map.forEach(function (m) { if (m.el.getBoundingClientRect().top + window.scrollY <= y) cur = m; });
-    if (cur === last) return;
-    last = cur;
-    map.forEach(function (m) {
-      if (m === cur) m.a.setAttribute('aria-current', 'true'); else m.a.removeAttribute('aria-current');
-    });
-    if (cur && row) {
-      var a = cur.a;
-      if (a.offsetLeft < row.scrollLeft + 8 || a.offsetLeft + a.offsetWidth > row.scrollLeft + row.clientWidth - 8) {
-        row.scrollLeft = Math.max(0, a.offsetLeft - 40);
-      }
-    }
-  }
-  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  update();
-})();
-</script>
 </body>
 </html>
