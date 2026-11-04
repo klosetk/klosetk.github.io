@@ -1,6 +1,6 @@
 /* Shared navigation menu for every page on this site. */
 html { scroll-behavior: smooth; }
-section[id], .part[id] { scroll-margin-top: 12px; }
+
 
 :root { --sn-line: var(--hairline); }
 @supports (color: color-mix(in srgb, red 50%, blue)) {
@@ -55,9 +55,13 @@ section[id], .part[id] { scroll-margin-top: 12px; }
 
 /* Menu bar: sticky at the top of the page from the first paint (built by site-nav.js) */
 .sn-bar {
-  position: sticky; top: 0; z-index: 30; background: var(--ground);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30; background: var(--ground);
   border-bottom: 1px solid var(--sn-line); padding-top: env(safe-area-inset-top, 0px);
+  transition: transform .22s ease, opacity .22s ease;
 }
+/* Hidden while the boxed menu under the hero is on screen, so only one menu shows at a time */
+.sn-bar.is-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+section[id], .part[id] { scroll-margin-top: 72px; }
 .sn-bar .sn-bar-in { display: flex; align-items: center; gap: 12px; padding-top: 9px; padding-bottom: 9px; }
 .sn-now { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; color: var(--ink-3); }
 .sn-pop {
@@ -74,4 +78,5 @@ section[id], .part[id] { scroll-margin-top: 12px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .sn-bar { transition: none; }
 }

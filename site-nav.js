@@ -7,7 +7,7 @@
 
   // Sticky bar
   var bar = document.createElement('div');
-  bar.className = 'sn-bar';
+  bar.className = 'sn-bar' + ('IntersectionObserver' in window ? ' is-hidden' : '');
   bar.innerHTML =
     '<div class="sn-bar-in wrap">' +
       '<button type="button" class="sn-btn has-chev" aria-expanded="false" aria-controls="sn-panel"><span class="sn-burger" aria-hidden="true"></span>Navigation menu</button>' +
@@ -67,6 +67,20 @@
     });
     now.textContent = cur >= 0 ? links[cur].textContent : '';
   }
+  // Show only one menu at a time: the sticky bar stays hidden while the boxed menu is on screen.
+  function showBar(on) {
+    bar.classList.toggle('is-hidden', !on);
+    bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+    if ('inert' in bar) bar.inert = !on;
+    if (!on) { setPanel(false); closeMore(null); }
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      showBar(!e.isIntersecting && e.boundingClientRect.top < 0);
+    }).observe(menu);
+  }
+
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   window.addEventListener('resize', update);
   update();
