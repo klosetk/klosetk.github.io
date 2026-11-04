@@ -451,7 +451,7 @@
     <div class="sn-card">
       <div class="sn-head">
         <p class="sn-title">Navigation menu</p>
-        <details class="sn-more"><summary>More projects</summary><div class="sn-drop"><a href="./" aria-current="page"><strong>Portfolio home</strong><span class="d">IT automation, identity, and Jira administration</span></a><a href="interior-design-system/"><strong>Interior Design System</strong><span class="d">AI prompt architecture, tested on a loft</span></a><a href="https://github.com/klosetk/it-automation-portfolio" target="_blank" rel="noopener noreferrer"><strong>Architecture write-ups</strong><span class="d">IT automation write-ups on GitHub</span></a></div></details>
+        <details class="sn-more"><summary>More projects</summary><div class="sn-drop"><a href="./" aria-current="page"><strong>Portfolio home</strong><span class="d">IT automation, identity, and Jira administration</span></a><a href="encoder-gpt/"><strong>Encoder GPT on AWS</strong><span class="d">AI platform: Bedrock, Lambda, Terraform</span></a><a href="interior-design-system/"><strong>Interior Design System</strong><span class="d">AI prompt architecture, tested on a loft</span></a><a href="https://github.com/klosetk/it-automation-portfolio" target="_blank" rel="noopener noreferrer"><strong>Architecture write-ups</strong><span class="d">IT automation write-ups on GitHub</span></a></div></details>
       </div>
       <div class="sn-links"><a href="#practice">Practice</a><a href="#ai-automation">AI &amp; automation</a><a href="#systems">Systems engineering</a><a href="#jira">Jira administration</a><a href="#tooling">Tooling</a><a href="#docs">Documentation</a></div>
     </div>
@@ -496,6 +496,28 @@
     </div>
 
     <div class="rows">
+
+      <article class="row">
+        <div class="row-meta">
+          <span class="yr">2026</span>
+          <h3><a href="encoder-gpt/">Encoder GPT on AWS</a></h3>
+          <span class="ref">Personal project · builder</span>
+        </div>
+        <div class="row-body">
+          <p>
+            Rebuilt my OpenAI ICD-10 coding assistant as a production-style AI service: Bedrock RAG
+            behind automatic PHI redaction, a containerized Lambda, and every resource defined in
+            Terraform. Deploys must pass an accuracy eval and a monitored canary, or they roll back.
+          </p>
+          <p class="result">
+            Added a <strong>persistent on-call AI agent</strong> (OpenClaw on EC2) whose IAM role is
+            read-only plus one write: rolling back a bad deploy. <a href="encoder-gpt/">Read the case study &rarr;</a>
+          </p>
+          <ul class="chips">
+            <li>Amazon Bedrock</li><li>AWS Lambda</li><li>Terraform</li><li>RAG</li><li>GitHub Actions</li><li>OpenClaw</li>
+          </ul>
+        </div>
+      </article>
 
       <article class="row">
         <div class="row-meta">

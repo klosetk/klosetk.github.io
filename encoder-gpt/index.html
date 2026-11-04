@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Encoder GPT on AWS | Khadijah Ellis</title>
+<meta name="description" content="An ICD-10 coding assistant rebuilt from an OpenAI custom GPT into a production-style AI service on AWS: Bedrock RAG, PHI redaction, Lambda, Terraform, eval-gated canary deploys, and an on-call AI agent.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  :root {
+    /* Clinical chart (light): chart paper, teal ink, coral highlight */
+    --ground:      #F7F5F0;
+    --surface:     #FFFFFF;
+    --ink:         #13232B;
+    --ink-2:       #3E4A50;
+    --ink-3:       #6B6558;
+    --hairline:    #DDD6C8;
+    --hairline-2:  #ECE7DD;
+    --accent:      #E4572E;
+    --accent-ink:  #B8401D;
+    --teal:        #0F6E6E;
+    --chip-bg:     #E3F0EE;
+    --chip-ink:    #0F5A5A;
+    --band: linear-gradient(90deg, #0F6E6E 0%, #0F6E6E 72%, #E4572E 72%, #E4572E 100%);
+    --glow: linear-gradient(90deg, transparent 26px, rgba(228,87,46,.45) 26px, rgba(228,87,46,.45) 28px, transparent 28px),
+            repeating-linear-gradient(180deg, transparent 0, transparent 27px, rgba(201,195,182,.45) 27px, rgba(201,195,182,.45) 28px);
+    --shadow: 0 10px 34px rgba(19,35,43,.18);
+    --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --col: 1120px;
+    --gutter: clamp(20px, 5vw, 56px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      /* Night chart (dark) */
+      --ground:     #13232B;
+      --surface:    #182C36;
+      --ink:        #F2EEE6;
+      --ink-2:      #CFC9BE;
+      --ink-3:      #A7A196;
+      --hairline:   #2C4350;
+      --hairline-2: #223844;
+      --accent:     #FF7A55;
+      --accent-ink: #FF9473;
+      --teal:       #4FB6A8;
+      --chip-bg:    #1E3A40;
+      --chip-ink:   #9FE1CB;
+      --band: linear-gradient(90deg, #4FB6A8 0%, #4FB6A8 72%, #FF7A55 72%, #FF7A55 100%);
+      --glow: linear-gradient(90deg, transparent 26px, rgba(255,122,85,.4) 26px, rgba(255,122,85,.4) 28px, transparent 28px),
+              repeating-linear-gradient(180deg, transparent 0, transparent 27px, rgba(44,67,80,.7) 27px, rgba(44,67,80,.7) 28px);
+      --shadow: 0 10px 34px rgba(0,0,0,.55);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    border-top: 5px solid transparent;
+    border-image: var(--band) 1;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter); }
+
+  a { color: var(--accent-ink); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0;
+  }
+
+  .back { display: inline-block; margin-top: 22px; font-family: var(--mono); font-size: 12.5px; }
+
+  /* Hero */
+  .hero { background: var(--glow); padding: clamp(40px, 7vh, 84px) var(--gutter) clamp(36px, 5vh, 56px); text-align: center; }
+  .hero h1 {
+    margin: 20px 0 0; font-size: clamp(2.4rem, 6.4vw, 4.4rem); font-weight: 700;
+    letter-spacing: -0.038em; line-height: 1.02; text-wrap: balance;
+  }
+  .hero .positioning {
+    margin: 24px auto 0; max-width: 62ch; font-size: 1.0625rem; color: var(--ink-2); text-wrap: pretty;
+  }
+
+  .metrics {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    margin: clamp(32px, 5vh, 52px) 0 0; background: var(--hairline);
+    border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; text-align: center;
+  }
+  .metric { background: var(--surface); padding: 24px 16px 22px; }
+  .metric .fig {
+    display: block; font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 600;
+    letter-spacing: -0.035em; font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .metric .cap { display: block; margin-top: 10px; font-size: 12.5px; line-height: 1.4; color: var(--ink-3); text-wrap: balance; }
+
+  /* Sections */
+  section.wrap { padding-top: clamp(52px, 7.5vh, 92px); }
+  .sec-head { margin-bottom: 30px; }
+  .sec-head h2 {
+    margin: 14px 0 0; font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 600;
+    letter-spacing: -0.03em; line-height: 1.12; text-wrap: balance;
+  }
+  .sec-head p.lede { margin: 12px 0 0; max-width: 64ch; color: var(--ink-3); font-size: 1rem; }
+
+  /* Interactive figure */
+  .figure { position: relative; }
+  .stage {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--hairline); background: var(--surface); line-height: 0;
+  }
+  .stage img { display: block; width: 100%; height: auto; }
+
+  .hs {
+    position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; padding: 0;
+    border-radius: 50%; border: 2px solid #fff; background: var(--accent); cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.45);
+    transition: transform .15s ease;
+  }
+  .hs::after {
+    content: ""; position: absolute; inset: -7px; border-radius: 50%;
+    border: 2px solid #fff; opacity: .0; animation: pulse 2.6s ease-out infinite;
+  }
+  .hs:hover, .hs[aria-expanded="true"] { transform: scale(1.18); }
+  .hs[aria-expanded="true"] { background: #fff; border-color: var(--accent); }
+  .hs.sourced { background: var(--accent); }
+  .hs.to-source, .hs.planned { background: #6F6585; }
+  .markers-off .hs { display: none; }
+  @keyframes pulse { 0% { opacity: .55; transform: scale(.7); } 80%, 100% { opacity: 0; transform: scale(1.25); } }
+
+  .card {
+    position: absolute; z-index: 5; width: 310px; max-width: calc(100% - 16px);
+    background: var(--surface); color: var(--ink); border: 1px solid var(--hairline);
+    border-radius: 12px; padding: 16px 16px 14px; box-shadow: var(--shadow);
+    line-height: 1.45; font-size: 14px;
+  }
+  .card[hidden] { display: none; }
+  .card .zone { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .card h3 { margin: 4px 0 0; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; }
+  .card .spec { margin: 8px 0 0; color: var(--ink-2); }
+  .card .shop { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--hairline); }
+  .card .shop .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .card .prod { margin: 4px 0 0; font-weight: 600; }
+  .card .price { margin: 2px 0 0; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .card .note { margin: 8px 0 0; color: var(--ink-3); font-size: 13px; }
+  .card .find {
+    display: inline-block; margin-top: 10px; font-weight: 600; font-size: 13.5px;
+  }
+  .card .close {
+    position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border: 0;
+    background: transparent; color: var(--ink-3); font-size: 20px; line-height: 1; cursor: pointer; border-radius: 6px;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+  .legend .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 7px; vertical-align: -1px; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--hairline); }
+  .legend .dot.s { background: var(--accent); }
+  .legend .dot.t { background: #6F6585; }
+  .legend button {
+    margin-left: auto; font: inherit; font-size: 12.5px; color: var(--accent-ink); background: transparent;
+    border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 13px; cursor: pointer;
+  }
+  .caption { margin: 14px 0 0; font-size: 14px; color: var(--ink-3); max-width: 70ch; }
+
+  .part { padding-top: clamp(64px, 9vh, 110px); }
+  .part .inner { border-top: 2px solid var(--ink); padding-top: 22px; }
+  .part h2 { margin: 10px 0 0; font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
+  .part p.lede { margin: 12px 0 0; max-width: 64ch; color: var(--ink-3); }
+  figure.plain { margin: 0; }
+  figure.plain img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--hairline); }
+  figure.plain figcaption { margin-top: 12px; font-size: 14px; color: var(--ink-3); max-width: 70ch; }
+
+  /* Cards, grids */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(22px, 3vw, 40px); }
+  .col { border-top: 2px solid var(--accent); padding-top: 16px; }
+  .col h3 { margin: 0; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.015em; }
+  .col p, .col li { font-size: 0.9375rem; color: var(--ink-2); }
+  .col p { margin: 8px 0 0; }
+  .col ul { margin: 8px 0 0; padding-left: 18px; }
+  .col .num { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: .1em; }
+
+  .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--hairline); }
+  .fact { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--hairline-2); font-size: 0.9375rem; }
+  .fact:nth-child(odd) { padding-right: 24px; }
+  .fact dt { font-weight: 600; }
+  .fact dd { margin: 0; color: var(--ink-2); }
+
+  ol.principles { list-style: none; counter-reset: p; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
+  ol.principles li { counter-increment: p; display: grid; grid-template-columns: 54px 1fr; gap: 8px; padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  ol.principles li::before { content: counter(p, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--accent-ink); padding-top: 4px; }
+  ol.principles strong { display: block; font-size: 1.0125rem; letter-spacing: -0.01em; }
+  ol.principles span { color: var(--ink-2); font-size: 0.9375rem; }
+
+  details { border: 1px solid var(--hairline); border-radius: 12px; background: var(--surface); margin-top: 16px; }
+  summary { cursor: pointer; padding: 14px 18px; font-weight: 600; font-size: 0.9625rem; }
+  pre {
+    margin: 0; padding: 4px 18px 18px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px;
+    line-height: 1.7; color: var(--ink-2); white-space: pre-wrap; word-break: break-word;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9125rem; }
+  th, td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-right: 0; padding-left: 12px; }
+  tr.total td { font-weight: 600; border-bottom: 0; }
+  td .sub { display: block; color: var(--ink-3); font-size: 12.5px; margin-top: 2px; }
+  .table-wrap { overflow-x: auto; }
+
+  .tag { font-family: var(--mono); font-size: 10.5px; background: var(--chip-bg); color: var(--chip-ink); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+
+  .callout {
+    margin-top: 22px; padding: 16px 18px; border-left: 3px solid var(--accent);
+    background: var(--surface); border-radius: 0 10px 10px 0; font-size: 0.9375rem; color: var(--ink-2);
+  }
+
+  footer {
+    margin-top: clamp(60px, 8vh, 96px); border-top: 1px solid var(--hairline); padding: 36px 0 60px;
+    display: flex; flex-wrap: wrap; gap: 14px 36px; align-items: baseline; justify-content: space-between;
+  }
+  footer .name { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; }
+  footer .meta { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+  @media (max-width: 940px) {
+    .grid3 { grid-template-columns: 1fr; gap: 24px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .facts { grid-template-columns: 1fr; }
+    .fact:nth-child(odd) { padding-right: 0; }
+  }
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .card { position: static; width: auto; max-width: none; margin-top: 12px; }
+    .fact { grid-template-columns: 1fr; gap: 2px; }
+    .legend button { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* Clinical chart details */
+  .eyebrow { color: var(--teal); }
+  .hero { border-bottom: 1px solid var(--hairline); }
+  .chart-id { display: inline-flex; gap: 0; margin-top: 18px; border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; font-family: var(--mono); font-size: 11px; text-align: left; background: var(--surface); }
+  .chart-id span { padding: 6px 12px; border-left: 1px solid var(--hairline); color: var(--ink-2); }
+  .chart-id span:first-child { border-left: 0; }
+  .chart-id b { display: block; font-size: 9.5px; letter-spacing: .12em; color: var(--ink-3); font-weight: 600; }
+  .chart-id .hot { color: var(--accent-ink); font-weight: 700; }
+  .status { display: inline-block; margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--accent-ink); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px; }
+  figure.chart { margin: 0; }
+  figure.chart img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  figure.chart figcaption { margin-top: 12px; font-size: 14px; color: var(--ink-3); max-width: 70ch; }
+  .col { border-top-color: var(--teal); }
+  .col.hot { border-top-color: var(--accent); }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+  .cta a { font-family: var(--mono); font-size: 12.5px; padding: 8px 14px; border: 1px solid var(--hairline); border-radius: 6px; background: var(--surface); color: var(--ink); }
+  .cta a:hover { border-color: var(--accent); text-decoration: none; }
+  @media (max-width: 720px) { .chart-id { flex-wrap: wrap; } }
+</style>
+<link rel="stylesheet" href="../site-nav.css">
+</head>
+<body>
+<main>
+
+  <header class="hero wrap">
+    <p class="eyebrow">Case chart &nbsp;·&nbsp; AI platform engineering &nbsp;·&nbsp; Healthcare</p>
+    <h1>From a chatbot prototype to a production AI platform</h1>
+    <p class="positioning">
+      I built Encoder GPT on OpenAI to help coders find accurate ICD-10 codes. It worked, but PHI
+      safety was a policy, accuracy was checked by hand, and nothing was monitored. This is the
+      rebuild: Bedrock behind automatic PHI redaction, every resource in Terraform, deploys that
+      must pass an accuracy gate, and an on-call AI agent allowed exactly one action: roll back.
+    </p>
+    <div class="chart-id" aria-label="Chart header">
+      <span><b>PATIENT</b><span class="hot" style="padding:0;border:0">ENCODER GPT</span></span>
+      <span><b>COMPUTE</b>AWS Lambda</span>
+      <span><b>MODELS</b>Bedrock</span>
+      <span><b>IaC</b>Terraform</span>
+      <span><b>REGION</b>us-east-2</span>
+    </div>
+    <div><span class="status">Status: deploying to AWS (us-east-2)</span></div>
+    <div class="metrics">
+      <div class="metric"><span class="fig">0</span><span class="cap">API keys in code or config. Access is IAM roles only</span></div>
+      <div class="metric"><span class="fig">85%</span><span class="cap">Eval accuracy a new version must reach before any traffic</span></div>
+      <div class="metric"><span class="fig">1</span><span class="cap">Write permission for the on-call agent: roll back</span></div>
+      <div class="metric"><span class="fig">4</span><span class="cap">Real deployment blockers diagnosed and fixed in code</span></div>
+    </div>
+    <div class="cta">
+      <a href="https://github.com/klosetk/encoder-gpt" target="_blank" rel="noopener noreferrer">View the code on GitHub &rarr;</a>
+      <a href="https://github.com/klosetk/encoder-gpt/blob/main/RUNBOOK.md" target="_blank" rel="noopener noreferrer">Read the runbook</a>
+    </div>
+    <a class="back" href="../">&larr; Back to portfolio</a>
+  </header>
+
+  <nav class="sn-static wrap" aria-label="Navigation menu">
+    <div class="sn-card">
+      <div class="sn-head">
+        <p class="sn-title">Navigation menu</p>
+        <details class="sn-more"><summary>More projects</summary><div class="sn-drop"><a href="../"><strong>Portfolio home</strong><span class="d">IT automation, identity, and Jira administration</span></a><a href="./" aria-current="page"><strong>Encoder GPT on AWS</strong><span class="d">AI platform: Bedrock, Lambda, Terraform</span></a><a href="../interior-design-system/"><strong>Interior Design System</strong><span class="d">AI prompt architecture, tested on a loft</span></a><a href="https://github.com/klosetk/it-automation-portfolio" target="_blank" rel="noopener noreferrer"><strong>Architecture write-ups</strong><span class="d">IT automation write-ups on GitHub</span></a></div></details>
+      </div>
+      <div class="sn-links"><a href="#problem">Problem</a><a href="#architecture">Architecture</a><a href="#bedrock">Bedrock</a><a href="#lambda">Lambda</a><a href="#terraform">Terraform</a><a href="#pipeline">Pipeline</a><a href="#agent">On-call agent</a><a href="#case-notes">Case notes</a><a href="#drift">Drift</a><a href="#next">Next</a></div>
+    </div>
+  </nav>
+
+  <section class="wrap" id="problem">
+    <div class="sec-head">
+      <p class="eyebrow">Chief complaint</p>
+      <h2>The prototype worked. It just wasn't safe to run.</h2>
+      <p class="lede">Medical coders lose time hunting for the right ICD-10 code, and mistakes affect claims. The original custom GPT helped, but it had the gaps prototypes usually have.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Prototype (custom GPT)</th><th>This rebuild</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PHI protection</strong></td><td>Policy: "don't enter PHI"</td><td>Automatic redaction before the model sees anything</td></tr>
+          <tr><td><strong>Credentials</strong></td><td>Platform login</td><td>IAM roles, no API keys anywhere</td></tr>
+          <tr><td><strong>Invented codes</strong></td><td>Possible</td><td>Restricted to retrieved candidates, then filtered</td></tr>
+          <tr><td><strong>Accuracy checks</strong></td><td>Manual spot-checks</td><td>Automated evals gate every deploy</td></tr>
+          <tr><td><strong>Monitoring</strong></td><td>None</td><td>Alarms, traces, and a human-review-rate metric</td></tr>
+          <tr><td><strong>Infrastructure</strong></td><td>Clicked together</td><td>Terraform: versioned and reviewable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wrap" id="architecture">
+    <div class="sec-head">
+      <p class="eyebrow">Chart 2 &nbsp;·&nbsp; Architecture</p>
+      <h2>One request, end to end</h2>
+      <p class="lede">Everything inside the dashed boundary is defined in Terraform.</p>
+    </div>
+    <figure class="chart"><picture><source media="(prefers-color-scheme: dark)" srcset="img/architecture-dark.svg"><img src="img/architecture-light.svg" alt="Architecture: a client request goes to AWS Lambda, which redacts PHI, embeds with Titan, retrieves ICD-10 candidates from S3, and reasons with Claude on Bedrock. CloudWatch monitors it, and the Fleet Ops Agent can roll back." loading="lazy" width="1200"></picture></figure>
+  </section>
+
+  <section class="wrap" id="bedrock">
+    <div class="sec-head">
+      <p class="eyebrow">DX-05 &nbsp;·&nbsp; Amazon Bedrock</p>
+      <h2>How the AI picks a code</h2>
+      <p class="lede">Bedrock runs the models inside the AWS account boundary, and an IAM role grants access, so there are no API keys to leak. Each request runs five steps.</p>
+    </div>
+    <ol class="principles">
+      <li><div><strong>Redact PHI</strong><span>SSNs, dates, phone numbers, emails, and record numbers become [TYPE] placeholders before any model sees the text. The backend is swappable: free pattern matching for demos, or Amazon Comprehend Medical in production.</span></div></li>
+      <li><div><strong>Embed</strong><span>Titan Text Embeddings V2 turns the description into a 512-number vector that captures its meaning.</span></div></li>
+      <li><div><strong>Retrieve</strong><span>Cosine similarity finds the closest ICD-10 codes in the index. This is RAG: retrieval-augmented generation.</span></div></li>
+      <li><div><strong>Reason</strong><span>Claude chooses only from the retrieved candidates and returns a confidence score and a rationale.</span></div></li>
+      <li><div><strong>Guard</strong><span>Any code Claude returns that wasn't retrieved is dropped. Low confidence flags the request for a human coder, who always makes the final call.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="wrap" id="lambda">
+    <div class="sec-head">
+      <p class="eyebrow">DX-03 &nbsp;·&nbsp; AWS Lambda</p>
+      <h2>Serverless where it fits, a server where it doesn't</h2>
+    </div>
+    <div class="grid3">
+      <div class="col"><p class="num">01</p><h3>Runs only when called</h3><p>No server to patch or pay for while idle. Demo traffic costs pennies.</p></div>
+      <div class="col"><p class="num">02</p><h3>Versions and a live alias</h3><p>Callers always hit <code>live</code>. The pipeline moves it, which makes canary releases and one-step rollback possible.</p></div>
+      <div class="col hot"><p class="num">03</p><h3>EC2 for the agent</h3><p>The on-call agent must stay connected to Slack and run on a schedule, so it gets an always-on Graviton instance instead.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="terraform">
+    <div class="sec-head">
+      <p class="eyebrow">RX &nbsp;·&nbsp; Terraform</p>
+      <h2>Every resource is code</h2>
+      <p class="lede">One command creates the whole system, and one command removes it. Nothing is clicked together in the console.</p>
+    </div>
+    <figure class="chart"><picture><source media="(prefers-color-scheme: dark)" srcset="img/terraform-dark.svg"><img src="img/terraform-light.svg" alt="The Terraform files and what each one builds: Lambda, storage, IAM, observability, the agent, and GitHub OIDC." loading="lazy" width="1200"></picture></figure>
+    <dl class="facts" style="margin-top:28px">
+      <div class="fact"><dt>Remote state</dt><dd>Versioned, private S3 with lockfile locking, so a damaged state file can be restored.</dd></div>
+      <div class="fact"><dt>ignore_changes</dt><dd>Terraform owns the function's shape; CI/CD owns which image runs. Without it, every apply would undo the latest deploy.</dd></div>
+      <div class="fact"><dt>prevent_destroy</dt><dd>Protects the ICD-10 index from an accidental destroy.</dd></div>
+      <div class="fact"><dt>Least privilege</dt><dd>The runtime role can call two model families, read one S3 prefix, and write logs. Nothing else.</dd></div>
+      <div class="fact"><dt>Feature flags</dt><dd>Parts an account may block (GitHub OIDC, reserved concurrency, the agent) turn on and off without breaking the rest.</dd></div>
+      <div class="fact"><dt>Policy checks</dt><dd>Checkov scans every change; each skipped rule is documented with its reason.</dd></div>
+    </dl>
+  </section>
+
+  <section class="wrap" id="pipeline">
+    <div class="sec-head">
+      <p class="eyebrow">TX &nbsp;·&nbsp; Delivery pipeline</p>
+      <h2>Trust built into the system, not into reviewers</h2>
+      <p class="lede">No change reaches users without passing tests, policy checks, an accuracy gate, and a monitored canary. If anything fails, it rolls back on its own.</p>
+    </div>
+    <figure class="chart"><picture><source media="(prefers-color-scheme: dark)" srcset="img/pipeline-dark.svg"><img src="img/pipeline-light.svg" alt="Delivery pipeline: pull request checks, then build, publish, eval gate, canary, and bake, ending in promote or roll back." loading="lazy" width="1200"></picture></figure>
+  </section>
+
+  <section class="wrap" id="agent">
+    <div class="sec-head">
+      <p class="eyebrow">DX-08 &nbsp;·&nbsp; On-call agent</p>
+      <h2>An AI that operates the service, with one permission to change it</h2>
+      <p class="lede">The Fleet Ops Agent is a persistent OpenClaw agent on AWS that works like a junior on-call engineer.</p>
+    </div>
+    <div class="grid3">
+      <div class="col"><p class="num">WATCH</p><h3>Checks health on a schedule</h3><p>Reads alarms and logs every two hours on weekdays and posts a morning digest to Slack.</p></div>
+      <div class="col"><p class="num">DIAGNOSE</p><h3>Follows the runbook</h3><p>Works layer by layer: what changed, what the logs say, and which layer failed.</p></div>
+      <div class="col hot"><p class="num">ACT</p><h3>Rolls back, or escalates</h3><p>Rolls back a bad deploy when the rules allow it, then verifies with evals. For problems a rollback can't fix, it hands a human the exact fix.</p></div>
+    </div>
+    <p class="callout"><strong>The safety model:</strong> the agent's instructions say what it should do; IAM decides what it can do. It has read-only access plus one write, moving the <code>live</code> alias, and an explicit deny blocks code, IAM, and storage changes. No SSH, no open ports, no stored keys.</p>
+  </section>
+
+  <section class="wrap" id="case-notes">
+    <div class="sec-head">
+      <p class="eyebrow">Case notes</p>
+      <h2>Four problems I diagnosed while deploying it</h2>
+      <p class="lede">Each one sat in a different layer, and each fix lives in code with the reason documented.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Symptom</th><th>Diagnosis</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Storage bucket denied</strong></td><td>The error named a service control policy: a rule above the account that overrides its permissions. The same request succeeded in another region, proving the account was locked to its home region.</td><td>Region became a setting instead of hardcoded.</td></tr>
+          <tr><td><strong>GitHub connection denied</strong></td><td>The same guardrail blocks creating identity providers on this account type.</td><td>Made it an on/off flag so the core service still deploys.</td></tr>
+          <tr><td><strong>Lambda limit rejected</strong></td><td>New accounts get 10 concurrent executions, and AWS keeps all 10 unreserved.</td><td>Made the limit configurable, defaulting to unreserved.</td></tr>
+          <tr><td><strong>Alarm couldn't fire</strong></td><td>The code catches its own errors and returns HTTP 500, so the built-in error metric stayed at zero.</td><td>Added a log-based failure metric and combined both in one alarm.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="callout">The last one was caught by reasoning about how the code actually fails, before it hid a real incident.</p>
+  </section>
+
+  <section class="wrap" id="drift">
+    <div class="sec-head">
+      <p class="eyebrow">Vitals &nbsp;·&nbsp; Drift</p>
+      <h2>Treating drift as a deployment problem</h2>
+      <p class="lede">ICD-10-CM changes every October 1st, and models change underneath you. Every moving part is versioned, and none changes without passing evals and a canary.</p>
+    </div>
+    <div class="grid3">
+      <div class="col"><p class="num">DATA</p><h3>The code set changes</h3><p>Each year's index is built as a new version, tested against the old one, then rolled out like code.</p></div>
+      <div class="col"><p class="num">RETRIEVAL</p><h3>The corpus grows</h3><p>At ~74,000 codes: exact in-memory vector search plus keyword matching, so precise terms aren't blurred.</p></div>
+      <div class="col"><p class="num">MODEL</p><h3>Behavior shifts quietly</h3><p>Model, prompt, and index versions are logged per request, and a rising human-review rate signals drift evals missed.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="next">
+    <div class="sec-head">
+      <p class="eyebrow">Plan</p>
+      <h2>Next</h2>
+    </div>
+    <ol class="principles">
+      <li><div><strong>Index the full code set</strong><span>All ~74,000 ICD-10-CM codes with in-memory vector search, hybrid keyword matching, and code-set versioning. About three cents of embedding cost.</span></div></li>
+      <li><div><strong>Record the agent catching a bad deploy</strong><span>A chaos script puts a broken version live; the agent finds it, rolls back, verifies with evals, and reports in Slack.</span></div></li>
+      <li><div><strong>Grow the evals</strong><span>Cases across every ICD-10 chapter, with accuracy tracked over time.</span></div></li>
+    </ol>
+  </section>
+
+  <footer class="wrap">
+    <span class="name">Khadijah Ellis</span>
+    <span class="meta">
+      <a href="../">Portfolio</a>
+      <a href="https://github.com/klosetk/encoder-gpt">Source on GitHub</a>
+      <span>AI platform case study, 2026</span>
+    </span>
+  </footer>
+
+</main>
+
+<script src="../site-nav.js"></script>
+</body>
+</html>
