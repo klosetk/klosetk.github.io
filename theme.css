@@ -1,7 +1,7 @@
 /* Shared minimal theme: one solid Morning-dew colour per page, black Quicksand type.
    Set the page colour with <html data-page="aqua|mint|grey">. */
-@font-face{font-family:"Quicksand";src:url("fonts/quicksand-regular.woff2") format("woff2");font-weight:300 500;font-style:normal;font-display:swap}
-@font-face{font-family:"Quicksand";src:url("fonts/quicksand-bold.woff2") format("woff2");font-weight:600 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Quicksand";src:url("fonts/quicksand-regular.woff2?v=3") format("woff2");font-weight:300 500;font-style:normal;font-display:swap}
+@font-face{font-family:"Quicksand";src:url("fonts/quicksand-bold.woff2?v=3") format("woff2");font-weight:600 800;font-style:normal;font-display:swap}
 
 :root:root:root{
   --ground:#AFEEEE; --surface:transparent;
