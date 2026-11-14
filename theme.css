@@ -46,3 +46,14 @@ body{padding-top:58px}
   .sn-bar.sn-overflow .sn-btn.has-chev{display:inline-flex!important}
   .sn-bar.sn-overflow .sn-now{display:block!important;flex:1}
 }
+
+/* Legibility: opaque soft panels over photos, and buttons that never go black-on-black */
+.card,.sn-drop,.sn-pop{background:#F7F7F4!important;color:#000!important;border:1px solid #000!important}
+.card *{color:#000}
+.card .zone,.card .shop .label,.card .spec{color:#262626!important}
+.try-go,.try-go:hover{background:#fff!important;color:#000!important;border:1px solid #000!important;filter:none!important}
+.try-go:hover{background:#F7F7F4!important}
+.samples button,.samples button:hover,.samples button[aria-pressed="true"]{background:#fff!important;color:#000!important;border-color:#000!important}
+.samples button[aria-pressed="true"]{background:#F7F7F4!important;font-weight:700}
+.sugg li,.redacted{background:#F7F7F4!important;color:#000!important}
+.src{background:#fff!important;color:#000!important;border:1px solid #000}
