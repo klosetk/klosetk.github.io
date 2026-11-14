@@ -7,7 +7,7 @@
 
   // Sticky bar
   var bar = document.createElement('div');
-  bar.className = 'sn-bar' + ('IntersectionObserver' in window ? ' is-hidden' : '');
+  bar.className = 'sn-bar';
   bar.innerHTML =
     '<div class="sn-bar-in wrap">' +
       '<button type="button" class="sn-btn has-chev" aria-expanded="false" aria-controls="sn-panel"><span class="sn-burger" aria-hidden="true"></span>Navigation menu</button>' +
@@ -15,7 +15,15 @@
     '</div>' +
     '<div class="sn-pop" id="sn-panel" hidden><div class="sn-panel wrap"></div></div>';
   var toggle = bar.querySelector('.sn-btn'), now = bar.querySelector('.sn-now'), panel = bar.querySelector('.sn-pop'), list = bar.querySelector('.sn-panel');
-  var copies = links.map(function (a) { var c = a.cloneNode(true); list.appendChild(c); return c; });
+  var inline = document.createElement('nav');
+  inline.className = 'sn-inline sn-panel';
+  inline.setAttribute('aria-label', 'Sections');
+  var copies = [], copies2 = [];
+  links.forEach(function (a) {
+    var c = a.cloneNode(true); list.appendChild(c); copies.push(c);
+    var d = a.cloneNode(true); inline.appendChild(d); copies2.push(d);
+  });
+  bar.querySelector('.sn-bar-in').insertBefore(inline, now);
   var more = menu.querySelector('.sn-more');
   if (more) bar.querySelector('.sn-bar-in').appendChild(more.cloneNode(true));
   document.body.insertBefore(bar, document.body.firstChild);
@@ -62,8 +70,8 @@
     if (cur === last) return;
     last = cur;
     links.forEach(function (a, i) {
-      if (i === cur) { a.setAttribute('aria-current', 'true'); copies[i].setAttribute('aria-current', 'true'); }
-      else { a.removeAttribute('aria-current'); copies[i].removeAttribute('aria-current'); }
+      if (i === cur) { a.setAttribute('aria-current', 'true'); copies[i].setAttribute('aria-current', 'true'); copies2[i].setAttribute('aria-current', 'true'); }
+      else { a.removeAttribute('aria-current'); copies[i].removeAttribute('aria-current'); copies2[i].removeAttribute('aria-current'); }
     });
     now.textContent = cur >= 0 ? links[cur].textContent : '';
   }
@@ -74,14 +82,16 @@
     if ('inert' in bar) bar.inert = !on;
     if (!on) { setPanel(false); closeMore(null); }
   }
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      var e = entries[0];
-      showBar(!e.isIntersecting && e.boundingClientRect.top < 0);
-    }).observe(menu);
-  }
 
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  // Wide screens show the section links inline; if they do not fit, fall back to the Navigation menu button.
+  function fit() {
+    bar.classList.remove('sn-overflow');
+    if (inline.scrollWidth > inline.clientWidth + 1) bar.classList.add('sn-overflow');
+  }
+  window.addEventListener('resize', function () { fit(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
   window.addEventListener('resize', update);
   update();
 })();

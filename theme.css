@@ -1,0 +1,48 @@
+/* Shared minimal theme: one solid Morning-dew colour per page, black Quicksand type.
+   Set the page colour with <html data-page="aqua|mint|grey">. */
+@font-face{font-family:"Quicksand";src:url("fonts/quicksand-regular.woff2") format("woff2");font-weight:300 500;font-style:normal;font-display:swap}
+@font-face{font-family:"Quicksand";src:url("fonts/quicksand-bold.woff2") format("woff2");font-weight:600 800;font-style:normal;font-display:swap}
+
+:root:root:root{
+  --ground:#AFEEEE; --surface:transparent;
+  --ink:#000; --ink-2:#000; --ink-3:#000;
+  --hairline:rgba(0,0,0,.28); --hairline-2:rgba(0,0,0,.14);
+  --accent:#000; --accent-ink:#000; --teal:#000;
+  --chip-bg:rgba(0,0,0,.08); --chip-ink:#000;
+  --band:none; --glow:none; --shadow:none;
+  --sans:"Quicksand",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"Roboto Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+:root:root:root[data-page="aqua"]{--ground:#AFEEEE}
+:root:root:root[data-page="mint"]{--ground:#ADEBB3}
+:root:root:root[data-page="grey"]{--ground:#D3D3D3}
+
+html,body{background:var(--ground)!important;color:#000}
+*{border-image:none!important;box-shadow:none!important;text-shadow:none!important}
+.hero,.sn-bar,.sn-card,.sn-drop{background:var(--ground)!important;background-image:none!important}
+h1,h2,h3,h4,strong,b,th{font-weight:700}
+a{color:#000}
+.method,p,li,td{font-family:var(--sans)}
+.metrics{background:transparent!important;gap:0!important}
+.metric{background:transparent!important;outline:1px solid var(--hairline);outline-offset:-.5px}
+.status.live{color:#000!important;border-color:#000!important}
+
+/* Navigation bar: always at the top of every page */
+.sn-static{display:none!important}
+body{padding-top:58px}
+.sn-bar{border-bottom:1px solid #000!important}
+.sn-bar .sn-inline{display:none}
+@media (min-width:1100px){
+  .sn-bar .sn-inline{display:flex;flex:1;flex-wrap:nowrap;gap:4px;min-width:0}
+  .sn-inline a{padding:6px 10px;font-size:13.5px;border-color:transparent!important;background:transparent!important;white-space:nowrap}
+  .sn-inline a:hover,.sn-inline a[aria-current="true"]{border-color:#000!important}
+  .sn-bar .sn-btn.has-chev,.sn-now{display:none!important}
+}
+.sn-bar .sn-more{flex:none}
+@media (min-width:1100px){.sn-bar .sn-inline{overflow-x:auto;scrollbar-width:none;flex:1 1 0}.sn-bar .sn-inline::-webkit-scrollbar{display:none}}
+@media (min-width:1100px){
+  .sn-bar.sn-overflow .sn-inline{display:none!important}
+  .sn-bar.sn-overflow .sn-btn.has-chev{display:inline-flex!important}
+  .sn-bar.sn-overflow .sn-now{display:block!important;flex:1}
+}

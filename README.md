@@ -2,7 +2,7 @@
 
 Personal portfolio site, served with GitHub Pages at **https://klosetk.github.io**.
 
-Self-contained `index.html` (light and dark mode, no build step). Fonts load from Google Fonts and fall back to system fonts offline.
+Self-contained pages (no build step). Minimal design: one solid Morning dew colour per page (aqua, mint, grey) with black Quicksand Regular and Bold, self-hosted in `fonts/`. Shared styles live in `theme.css`.
 
 Project pages:
 - [`encoder-gpt/`](encoder-gpt): Encoder GPT on AWS, an ICD-10 coding assistant rebuilt as an AI platform (Bedrock, Lambda, Terraform, eval-gated deploys, on-call agent). Code: [klosetk/encoder-gpt](https://github.com/klosetk/encoder-gpt)

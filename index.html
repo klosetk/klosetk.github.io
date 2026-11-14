@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page="aqua">
 <head>
 <meta charset="utf-8">
 <title>Khadijah Ellis | IT Systems Engineer &amp; Automation Architect</title>
@@ -17,24 +17,26 @@
 <meta name="twitter:image" content="https://klosetk.github.io/og-image.png?v=2">
 
 <style>
+  @font-face{font-family:"Quicksand";src:url("fonts/quicksand-regular.woff2") format("woff2");font-weight:300 500;font-style:normal;font-display:swap}
+  @font-face{font-family:"Quicksand";src:url("fonts/quicksand-bold.woff2") format("woff2");font-weight:600 800;font-style:normal;font-display:swap}
   :root {
-    /* Tokyo sunrise (light) */
-    --ground:      #FFF9F4;
-    --surface:     #FFFFFF;
-    --ink:         #2A2340;
-    --ink-2:       #5A5170;
-    --ink-3:       #6F6585;
-    --hairline:    #F0DFD3;
-    --hairline-2:  #F7ECE3;
-    --accent:      #F2677B;
-    --accent-ink:  #C23B4A;
-    --chip-bg:     #FDEBDD;
-    --chip-ink:    #6B3E3A;
-    --band: linear-gradient(90deg, #FFB38A 0%, #FF8FA3 45%, #B7A6E8 75%, #8EC5E8 100%);
-    --glow: radial-gradient(60% 60% at 50% 0%, rgba(255,179,138,.35) 0%, rgba(255,143,163,.16) 45%, rgba(255,249,244,0) 100%);
+    /* Morning dew (light) */
+    --ground:      #F0FFE0;
+    --surface:     #FAFFF5;
+    --ink:         #0A0A0A;
+    --ink-2:       #262626;
+    --ink-3:       #404040;
+    --hairline:    #D3D3D3;
+    --hairline-2:  #E6EEEE;
+    --accent:      #AFEEEE;
+    --accent-ink:  #0A5555;
+    --chip-bg:     #DDF6E0;
+    --chip-ink:    #24563A;
+    --band: linear-gradient(90deg, #AFEEEE 0%, #ADEBB3 55%, #C4C4C4 100%);
+    --glow: radial-gradient(60% 60% at 50% 0%, rgba(175,238,238,.6) 0%, rgba(173,235,179,.3) 45%, rgba(240,255,224,0) 100%);
 
-    --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    --mono: var(--sans);
+    --sans: "Quicksand", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "Roboto Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
     --col: 1120px;
     --gutter: clamp(20px, 5vw, 56px);
@@ -43,36 +45,36 @@
   /* Tokyo sunset (dark) */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground:     #151022;
-      --surface:    #1E1730;
-      --ink:        #FFF1E8;
-      --ink-2:      #D9CBDC;
-      --ink-3:      #B0A2BD;
-      --hairline:   #33284A;
-      --hairline-2: #271E3B;
-      --accent:     #FF8A5B;
-      --accent-ink: #FFA67F;
-      --chip-bg:    #2A2040;
-      --chip-ink:   #D9C9E6;
-      --band: linear-gradient(90deg, #FF9A62 0%, #E8506F 40%, #9B5DE5 75%, #3D4A9E 100%);
-      --glow: radial-gradient(60% 60% at 50% 0%, rgba(232,80,111,.28) 0%, rgba(155,93,229,.14) 45%, rgba(21,16,34,0) 100%);
+      --ground:     #0F1A1B;
+      --surface:    #162324;
+      --ink:        #E8F7F6;
+      --ink-2:      #C4D6D6;
+      --ink-3:      #9DB3B3;
+      --hairline:   #2B3C3D;
+      --hairline-2: #213031;
+      --accent:     #AFEEEE;
+      --accent-ink: #AFEEEE;
+      --chip-bg:    #1D3A32;
+      --chip-ink:   #ADEBB3;
+      --band: linear-gradient(90deg, #AFEEEE 0%, #ADEBB3 55%, #C4C4C4 100%);
+      --glow: radial-gradient(60% 60% at 50% 0%, rgba(175,238,238,.22) 0%, rgba(173,235,179,.1) 45%, rgba(15,26,27,0) 100%);
     }
   }
 
   :root[data-theme="dark"] {
-    --ground:     #151022;
-    --surface:    #1E1730;
-    --ink:        #FFF1E8;
-    --ink-2:      #D9CBDC;
-    --ink-3:      #B0A2BD;
-    --hairline:   #33284A;
-    --hairline-2: #271E3B;
-    --accent:     #FF8A5B;
-    --accent-ink: #FFA67F;
-    --chip-bg:    #2A2040;
-    --chip-ink:   #D9C9E6;
-    --band: linear-gradient(90deg, #FF9A62 0%, #E8506F 40%, #9B5DE5 75%, #3D4A9E 100%);
-    --glow: radial-gradient(60% 60% at 50% 0%, rgba(232,80,111,.28) 0%, rgba(155,93,229,.14) 45%, rgba(21,16,34,0) 100%);
+    --ground:     #0F1A1B;
+    --surface:    #162324;
+    --ink:        #E8F7F6;
+    --ink-2:      #C4D6D6;
+    --ink-3:      #9DB3B3;
+    --hairline:   #2B3C3D;
+    --hairline-2: #213031;
+    --accent:     #AFEEEE;
+    --accent-ink: #AFEEEE;
+    --chip-bg:    #1D3A32;
+    --chip-ink:   #ADEBB3;
+    --band: linear-gradient(90deg, #AFEEEE 0%, #ADEBB3 55%, #C4C4C4 100%);
+    --glow: radial-gradient(60% 60% at 50% 0%, rgba(175,238,238,.22) 0%, rgba(173,235,179,.1) 45%, rgba(15,26,27,0) 100%);
   }
 
   * { box-sizing: border-box; }
@@ -107,7 +109,7 @@
   .eyebrow {
     font-family: var(--mono);
     font-size: 11.5px;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-3);
@@ -134,7 +136,7 @@
   .roles {
     margin: 20px auto 0;
     font-size: clamp(1.0625rem, 2.3vw, 1.375rem);
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.014em;
     color: var(--ink-2);
     max-width: 30ch;
@@ -153,13 +155,13 @@
   .method {
     margin: 26px auto 0;
     max-width: 66ch;
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 12.5px;
     line-height: 1.9;
     color: var(--ink-3);
     letter-spacing: 0.01em;
   }
-  .method b { color: var(--ink-2); font-weight: 500; }
+  .method b { color: var(--ink-2); font-weight: 400; }
   .method .arrow { color: var(--accent); padding: 0 2px; }
 
   /* ---------- Metric band ---------- */
@@ -186,14 +188,14 @@
   .metric .fig {
     display: block;
     font-size: clamp(1.75rem, 4vw, 2.4rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.035em;
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
   .metric .fig sup {
     font-size: 0.55em;
-    font-weight: 500;
+    font-weight: 400;
     top: -0.55em;
   }
   .metric .cap {
@@ -213,7 +215,7 @@
   .sec-head h2 {
     margin: 14px 0 0;
     font-size: clamp(1.6rem, 3.4vw, 2.2rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.12;
     text-wrap: balance;
@@ -236,7 +238,7 @@
   .cap-col h3 {
     margin: 0;
     font-size: 1.0625rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.015em;
   }
   .cap-col p {
@@ -268,7 +270,7 @@
   .row-meta h3 {
     margin: 9px 0 0;
     font-size: 1.1875rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.022em;
     line-height: 1.24;
     text-wrap: balance;
@@ -294,7 +296,7 @@
     max-width: 64ch;
   }
   .row-body p.result strong {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--accent-ink);
   }
   .row-body code {
@@ -338,7 +340,7 @@
   }
   .stack-row dt {
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
   }
   .stack-row dd {
@@ -361,7 +363,7 @@
   .w-item .fig {
     display: block;
     font-size: 1.6875rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.03em;
     font-variant-numeric: tabular-nums;
     line-height: 1.1;
@@ -369,7 +371,7 @@
   .w-item h3 {
     margin: 10px 0 0;
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
   }
   .w-item p {
@@ -390,7 +392,7 @@
   }
   footer .name {
     font-size: 1.0625rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
   footer .meta {
@@ -419,6 +421,8 @@
     * { animation: none !important; transition: none !important; }
   }
 </style>
+<link rel="stylesheet" href="theme.css">
+<link rel="preload" href="fonts/quicksand-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site-nav.css">
 </head>
 <body>
